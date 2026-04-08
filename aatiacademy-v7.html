@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AatiCademy | Where Faith Meets Academic Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ── DARK THEME (default) ── */
+[data-theme="dark"]{
+  --bg:#080808;--bg2:#0f0f0f;--bg3:#141414;--bg4:#1a1a1a;
+  --fg:#f5f0e8;--fg2:rgba(245,240,232,0.65);--fg3:rgba(245,240,232,0.3);--fg4:rgba(245,240,232,0.1);
+  --gold:#c9963c;--gold2:#e8b86d;--gold3:#f5d49a;--gold-glow:rgba(201,150,60,0.25);
+  --rule:rgba(245,240,232,0.07);--rule2:rgba(201,150,60,0.2);
+  --card-bg:rgba(255,255,255,0.025);--card-border:rgba(245,240,232,0.07);
+  --about-bg:#f5f0e8;--about-fg:#080808;--about-fg2:rgba(8,8,8,0.55);--about-gold:var(--gold);
+  --feat-bg:#f5f0e8;--feat-fg:#080808;--feat-fg2:rgba(8,8,8,0.5);
+  --form-bg:rgba(255,255,255,0.04);--form-border:rgba(255,255,255,0.09);--form-fg:var(--fg);
+  --footer-bg:#080808;
+  --ticker-bg:#0f0f0f;
+  --scrollbar:var(--gold);
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#faf8f4;--bg2:#f2ede4;--bg3:#e8e0d0;--bg4:#ddd4be;
+  --fg:#1a1208;--fg2:rgba(26,18,8,0.62);--fg3:rgba(26,18,8,0.35);--fg4:rgba(26,18,8,0.1);
+  --gold:#a8742a;--gold2:#c9963c;--gold3:#e8b86d;--gold-glow:rgba(168,116,42,0.2);
+  --rule:rgba(26,18,8,0.1);--rule2:rgba(168,116,42,0.25);
+  --card-bg:rgba(255,255,255,0.7);--card-border:rgba(26,18,8,0.1);
+  --about-bg:#1a1208;--about-fg:#f5f0e8;--about-fg2:rgba(245,240,232,0.6);--about-gold:#e8b86d;
+  --feat-bg:#f5f0e8;--feat-fg:#1a1208;--feat-fg2:rgba(26,18,8,0.5);
+  --form-bg:rgba(26,18,8,0.04);--form-border:rgba(26,18,8,0.12);--form-fg:var(--fg);
+  --footer-bg:#1a1208;
+  --ticker-bg:#f2ede4;
+  --scrollbar:var(--gold2);
+}
+
+body{font-family:'Lexend',system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;transition:background .4s,color .4s}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--scrollbar);border-radius:2px}
+
+/* ── CURSOR ── */
+#cur-dot{position:fixed;z-index:9999;pointer-events:none;width:10px;height:10px;border-radius:50%;background:var(--gold2);transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s;box-shadow:0 0 12px var(--gold-glow)}
+#cur-ring{position:fixed;z-index:9998;pointer-events:none;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(201,150,60,0.5);transform:translate(-50%,-50%);transition:width .32s cubic-bezier(0.16,1,0.3,1),height .32s cubic-bezier(0.16,1,0.3,1),border-color .2s,background .2s}
+#cur-trail{position:fixed;z-index:9997;pointer-events:none;width:5px;height:5px;border-radius:50%;background:rgba(201,150,60,0.3);transform:translate(-50%,-50%);transition:none}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block;animation:pgIn .6s cubic-bezier(0.16,1,0.3,1)}
+@keyframes pgIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+#nav.scrolled{background:rgba(8,8,8,.94);backdrop-filter:blur(20px);border-bottom-color:var(--rule)}
+[data-theme="light"] #nav.scrolled{background:rgba(250,248,244,.94)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:none}
+.nav-logo img{height:38px;width:auto;border-radius:4px}
+.nav-logo-name{font-family:'Cormorant',Georgia,serif;font-size:21px;font-weight:400;color:var(--fg);letter-spacing:.04em}
+.nav-links{list-style:none;display:flex;align-items:center;gap:34px}
+.nav-links a{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);text-decoration:none;transition:color .2s;cursor:none}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{padding:9px 22px;border:1px solid var(--rule2)!important;color:var(--gold2)!important;border-radius:2px;transition:all .25s!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--bg)!important;border-color:var(--gold)!important}
+/* theme toggle */
+.theme-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--rule2);background:none;color:var(--gold2);font-size:15px;cursor:none;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0;margin-left:8px}
+.theme-btn:hover{background:rgba(201,150,60,.12);transform:rotate(20deg) scale(1.1)}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:8px}
+.ham span{width:22px;height:1px;background:var(--fg);display:block;transition:all .3s}
+#mmenu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(8,8,8,.98);z-index:799;padding:52px 40px;flex-direction:column;gap:2px}
+[data-theme="light"] #mmenu{background:rgba(250,248,244,.98)}
+#mmenu.open{display:flex}
+#mmenu a{font-family:'Cormorant',serif;font-size:36px;font-weight:300;color:var(--fg3);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--rule);transition:color .2s;letter-spacing:.02em;cursor:none}
+#mmenu a:hover{color:var(--gold2)}
+
+/* ── HERO ── */
+#hero{position:relative;height:100vh;min-height:700px;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center}
+#hero-canvas{position:absolute;inset:0;z-index:1;width:100%;height:100%}
+.noise{position:absolute;inset:0;z-index:2;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none}
+.vignette{position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 35%,rgba(8,8,8,.75) 100%);pointer-events:none}
+[data-theme="light"] .vignette{background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 35%,rgba(250,248,244,.7) 100%)}
+
+.hero-content{position:relative;z-index:10;text-align:center;display:flex;flex-direction:column;align-items:center;padding:0 24px;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:7px 20px;border:1px solid var(--rule2);border-radius:100px;font-size:10px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:36px;opacity:0;animation:fadeUp .8s cubic-bezier(0.16,1,0.3,1) .2s forwards}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s ease-in-out infinite;flex-shrink:0}
+.hero-h{font-family:'Cormorant',serif;font-size:clamp(60px,9vw,122px);font-weight:300;line-height:.95;letter-spacing:-.025em;margin-bottom:28px;opacity:0;animation:fadeUp .9s cubic-bezier(0.16,1,0.3,1) .4s forwards}
+.hero-h .ital{font-style:italic;color:var(--gold2)}
+.hero-h .dim{color:var(--fg3);font-size:.82em}
+.hero-divider{width:1px;height:52px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:0 auto 28px;opacity:0;animation:fadeUp .7s ease .65s forwards}
+.hero-sub{font-size:14px;font-weight:200;line-height:1.88;color:var(--fg2);max-width:480px;margin-bottom:14px;opacity:0;animation:fadeUp .8s ease .75s forwards}
+.hero-trust{font-size:11px;font-weight:300;letter-spacing:.1em;color:var(--gold);margin-bottom:44px;opacity:0;animation:fadeUp .7s ease .85s forwards}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .8s ease .95s forwards}
+.hero-grades{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:28px;opacity:0;animation:fadeUp .7s ease 1.1s forwards}
+.grade-pill{font-size:10px;font-weight:300;letter-spacing:.1em;padding:5px 13px;border:1px solid var(--rule);border-radius:100px;color:var(--fg3)}
+.grade-sep{color:var(--gold);opacity:.4;font-size:12px}
+
+/* corner labels */
+.cl{position:absolute;z-index:10;font-size:10px;font-weight:400;letter-spacing:.13em;text-transform:uppercase;color:var(--fg2);opacity:0;animation:fadeIn .9s ease 1.3s forwards}
+.cl-tl{top:96px;left:52px}.cl-tr{top:96px;right:52px;text-align:right}
+.cl-bl{bottom:64px;left:52px}.cl-br{bottom:64px;right:52px;text-align:right}
+.cl-val{font-family:'Cormorant',serif;font-size:15px;font-weight:400;color:var(--gold2);display:block;margin-top:4px;letter-spacing:.01em}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease 1.5s forwards;cursor:none}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold2));animation:scrollPulse 2.2s ease-in-out infinite}
+.scroll-txt{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg4)}
+
+/* ── BUTTONS ── */
+.btn-gold{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--gold);color:#080808;font-family:'Lexend',sans-serif;font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;cursor:none;text-decoration:none;transition:all .3s;position:relative;overflow:hidden}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 16px 44px var(--gold-glow)}
+.btn-gold .arr{transition:transform .2s}
+.btn-gold:hover .arr{transform:translateX(5px)}
+.btn-wire{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:1px solid var(--rule2);color:var(--gold2);font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;cursor:none;text-decoration:none;transition:all .3s}
+.btn-wire:hover{border-color:var(--gold);background:rgba(201,150,60,.07);transform:translateY(-1px)}
+.btn-wire .arr{transition:transform .2s}
+.btn-wire:hover .arr{transform:translateX(5px)}
+
+/* ── TICKER ── */
+.ticker{overflow:hidden;padding:15px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--ticker-bg)}
+.ticker-inner{display:flex;animation:tick 38s linear infinite;width:max-content}
+.tick-item{display:flex;align-items:center;gap:10px;padding:0 44px;font-size:14px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);white-space:nowrap}
+.tick-sep{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:.5;flex-shrink:0}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SHARED ── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 52px}
+.sec{padding:80px 0}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);flex-shrink:0}
+.hdg{font-family:'Cormorant',serif;font-size:clamp(40px,4.5vw,68px);font-weight:300;line-height:1.06;letter-spacing:-.015em;color:var(--fg)}
+.hdg em{font-style:italic;color:var(--gold2)}
+.hdg.dk{color:var(--about-fg)}
+.hdg.dk em{color:var(--about-gold)}
+.subp{font-size:14px;font-weight:200;line-height:1.9;color:var(--fg2)}
+.subp.dk{color:var(--about-fg2)}
+
+/* ── STATS ── */
+.stats-sec{background:var(--bg2);padding:70px 0}
+.stats-hdr{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:80px}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule)}
+.reveal-fade{opacity:0;transition:opacity 1.5s ease}
+.reveal-fade.vis{opacity:1}
+.s-card{background:var(--bg2);padding:52px 44px;position:relative;overflow:hidden;transition:background .4s}
+.s-card:hover{background:var(--bg3)}
+.s-card::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(0.16,1,0.3,1)}
+.s-card:hover::after{transform:scaleX(1)}
+.s-n{font-family:'Cormorant',serif;font-size:clamp(60px,6vw,88px);font-weight:300;line-height:1;letter-spacing:-.04em;color:var(--fg);margin-bottom:10px}
+.s-n sup{font-size:.45em;color:var(--gold2);vertical-align:super}
+.s-l{font-size:13px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);margin-top:8px}
+
+/* ── ABOUT ── */
+.about-sec{padding:80px 0;background:var(--about-bg);transition:background .4s}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.about-quote{font-family:'Cormorant',serif;font-size:clamp(22px,2.6vw,34px);font-weight:300;font-style:italic;line-height:1.55;color:var(--about-fg);border-left:2px solid var(--about-gold);padding-left:28px;margin-bottom:36px}
+.about-p{font-size:14.5px;font-weight:300;line-height:1.9;color:var(--about-fg2);margin-bottom:18px}
+.boards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:32px}
+.board{padding:16px 20px;border:1px solid rgba(201,150,60,.22);border-radius:3px;background:rgba(201,150,60,.04);transition:all .3s;cursor:default}
+.board:hover{background:rgba(201,150,60,.1);border-color:var(--about-gold);transform:translateY(-2px)}
+.board-n{font-family:'Cormorant',serif;font-size:24px;font-weight:400;color:var(--about-gold);margin-bottom:3px}
+.board-l{font-size:11px;color:var(--about-fg2);letter-spacing:.06em;font-weight:300}
+.about-right{position:relative}
+
+.ab-dark{background:var(--bg);padding:48px 44px;border-radius:4px;position:relative;overflow:hidden;transition:background .4s}
+.ab-dark::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ab-title{font-family:'Cormorant',serif;font-size:34px;font-weight:300;line-height:1.25;color:var(--fg);margin-bottom:16px}
+.ab-title em{font-style:italic;color:var(--gold2)}
+.ab-p{font-size:14px;font-weight:200;color:var(--fg2);line-height:1.85;margin-bottom:30px}
+.ab-list{display:flex;flex-direction:column;gap:10px}
+.ab-item{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:3px;transition:border-color .3s}
+.ab-item:hover{border-color:var(--rule2)}
+.ab-dia{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;border-radius:1px}
+.ab-txt{font-size:13px;font-weight:200;color:var(--fg2);letter-spacing:.02em}
+
+/* ── VISION/MISSION ── */
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.mv-panel{padding:110px 80px;position:relative;overflow:hidden;min-height:560px;display:flex;flex-direction:column;justify-content:flex-end}
+.mv-dark{background:var(--bg3)}
+.mv-gold{background:var(--gold)}
+.mv-ghost{font-family:'Cormorant',serif;font-size:220px;font-weight:300;line-height:1;opacity:.04;position:absolute;top:-10px;right:20px;letter-spacing:-.08em;pointer-events:none;color:#fff}
+.mv-eye{font-family:'Cormorant',serif;font-size:clamp(40px,4.5vw,56px);font-weight:400;line-height:1;color:var(--gold);margin-bottom:12px;letter-spacing:-.01em}
+.mv-gold .mv-eye{color:#080808}
+.mv-h{font-family:'Cormorant',serif;font-size:clamp(22px,2.5vw,30px);font-weight:300;font-style:italic;line-height:1.4;margin-bottom:24px;color:rgba(255,255,255,.9)}
+.mv-gold .mv-h{color:rgba(8,8,8,.9)}
+.mv-p{font-size:14.5px;font-weight:200;line-height:1.88;color:rgba(255,255,255,.85)}
+.mv-gold .mv-p{color:rgba(8,8,8,.85)}
+
+/* ── CURRICULA ── */
+.curric-sec{padding:80px 0;background:var(--bg)}
+.curric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.curric-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;padding:32px 28px;transition:all .35s;position:relative;overflow:hidden}
+.curric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transform-origin:center;transition:transform .4s cubic-bezier(0.16,1,0.3,1)}
+.curric-card:hover::before{transform:scaleX(1)}
+.curric-card:hover{border-color:var(--rule2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.cc-flag{font-size:9.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.cc-title{font-family:'Cormorant',serif;font-size:24px;font-weight:300;color:var(--fg);margin-bottom:16px}
+.cc-list{display:flex;flex-direction:column;gap:8px}
+.cc-item{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:200;color:var(--fg2)}
+.cc-item::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;opacity:.7}
+.curric-wide{grid-column:span 2}
+.curric-promise{margin-top:24px;padding:36px;background:var(--card-bg);border:1px solid var(--rule2);border-radius:4px}
+.cp-body{font-size:14px;font-weight:200;line-height:1.88;color:var(--fg2);margin:12px 0 20px}
+.cp-tags{display:flex;flex-wrap:wrap;gap:9px}
+.cp-tag{font-size:10.5px;font-weight:300;letter-spacing:.07em;padding:6px 14px;border:1px solid var(--rule2);border-radius:100px;color:var(--gold2);transition:all .25s;cursor:default}
+.cp-tag:hover{background:rgba(201,150,60,.1);border-color:var(--gold)}
+.pop-subjects{margin-top:52px;border-top:1px solid var(--rule);padding-top:48px}
+.pop-title{font-size:10px;font-weight:300;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:18px}
+.pop-grid{display:flex;flex-wrap:wrap;gap:10px}
+.pop-item{padding:8px 18px;border:1px solid var(--rule);border-radius:100px;font-size:12px;font-weight:200;color:var(--fg2);transition:all .25s;cursor:default}
+.pop-item:hover{border-color:var(--rule2);color:var(--gold2)}
+
+/* ── PROGRAMS ── */
+.progs-sec{padding:80px 0;background:var(--bg2)}
+.prog-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:56px}
+.ptab{padding:10px 24px;background:none;border:1px solid var(--rule);color:var(--fg3);font-family:'Lexend',sans-serif;font-size:11px;font-weight:300;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;cursor:none;transition:all .25s;display:flex;align-items:center;gap:8px}
+.ptab:hover{border-color:var(--rule2);color:var(--gold2)}
+.ptab.act{background:rgba(201,150,60,.1);border-color:var(--rule2);color:var(--gold2)}
+.ptab-n{font-size:9px;opacity:.55}
+.pp{display:none}
+.pp.act{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;animation:pgIn .4s ease}
+.pp-h{font-family:'Cormorant',serif;font-size:clamp(34px,3.8vw,54px);font-weight:300;line-height:1.1;margin-bottom:16px;color:var(--fg)}
+.pp-p{font-size:14px;font-weight:200;line-height:1.88;color:var(--fg2);margin-bottom:30px}
+.pp-tags{display:flex;flex-wrap:wrap;gap:8px}
+.pp-tag{padding:6px 16px;border:1px solid var(--rule2);color:var(--gold2);font-size:11px;letter-spacing:.07em;border-radius:100px;font-weight:200}
+.pp-r{display:flex;flex-direction:column;gap:11px}
+.pp-topic{padding:18px 20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;transition:all .3s;cursor:default}
+.pp-topic:hover{background:rgba(201,150,60,.06);border-color:var(--rule2);transform:translateX(6px)}
+.pp-ttl{font-size:14px;font-weight:400;color:var(--fg);margin-bottom:5px}
+.pp-txt{font-size:12.5px;font-weight:200;color:var(--fg2);line-height:1.65}
+
+/* ── FEATURES ── */
+.feats-sec{padding:80px 0;background:var(--feat-bg);transition:background .4s}
+.feats-hdr{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:28px;margin-bottom:72px}
+.feats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;perspective:1200px}
+.feat-3d{width:100%;height:100%;perspective:1200px}
+.feat-inner{padding:40px 32px;height:100%;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;transition:all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);transform-style:preserve-3d;cursor:default;display:flex;flex-direction:column}
+.feat-inner:hover{transform:translateY(-8px) rotateX(6deg) rotateY(-6deg);box-shadow:-20px 25px 40px rgba(0,0,0,.1);border-color:var(--gold2);background:rgba(201,150,60,.02)}
+.feat-inner > *{transition:transform .5s cubic-bezier(0.175,0.885,0.32,1.275)}
+.feat-inner:hover .feat-svg{transform:translateZ(40px)}
+.feat-inner:hover .feat-n{transform:translateZ(20px)}
+.feat-inner:hover .feat-t{transform:translateZ(30px)}
+.feat-inner:hover .feat-p{transform:translateZ(20px)}
+.feat-svg{width:32px;height:32px;color:var(--gold);margin-bottom:28px}
+.feat-n{font-size:10px;letter-spacing:.12em;color:var(--gold2);margin-bottom:8px;font-weight:400}
+.feat-t{font-size:15.5px;font-weight:400;color:var(--feat-fg);margin-bottom:12px}
+.feat-p{font-size:13.5px;font-weight:300;color:var(--feat-fg2);line-height:1.75;}
+
+/* ── TESTIMONIALS ── */
+.test-sec{padding:80px 0;background:var(--bg);overflow:hidden}
+.test-carousel-wrap{margin-top:64px;width:100vw;margin-left:calc(-50vw + 50%);position:relative;overflow:hidden;padding:20px 0}
+.test-carousel-wrap::before, .test-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:15vw;z-index:2;pointer-events:none}
+.test-carousel-wrap::before{left:0;background:linear-gradient(to right, var(--bg), transparent)}
+.test-carousel-wrap::after{right:0;background:linear-gradient(to left, var(--bg), transparent)}
+.test-track{display:flex;gap:20px;width:max-content;animation:scroll-reviews 60s linear infinite}
+.test-track:hover{animation-play-state:paused}
+.tcard{width:380px;height:100%;flex-shrink:0;padding:36px;border:1px solid var(--card-border);border-radius:4px;background:var(--card-bg);transition:all .35s;position:relative;cursor:default}
+.tcard::before{content:'"';font-family:'Cormorant',serif;font-size:90px;line-height:.7;color:var(--gold);opacity:.15;position:absolute;top:22px;right:22px;pointer-events:none}
+.tcard:hover{border-color:var(--rule2);background:rgba(201,150,60,.04);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.15)}
+@keyframes scroll-reviews{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 10px))}}
+.t-stars{display:flex;gap:3px;margin-bottom:14px}
+.t-stars span{color:var(--gold2);font-size:13px}
+.t-txt{font-size:13.5px;font-weight:200;line-height:1.82;color:var(--fg2);margin-bottom:24px;font-style:italic}
+.t-author{display:flex;align-items:center;gap:12px}
+.t-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold3));display:flex;align-items:center;justify-content:center;font-family:'Cormorant',serif;font-size:17px;font-weight:400;color:#080808;flex-shrink:0}
+.t-name{font-size:13.5px;font-weight:400;color:var(--fg)}
+.t-loc{font-size:11px;color:var(--fg3);font-weight:200}
+
+/* ── CTA ── */
+.cta-sec{padding:90px 0;background:var(--bg2);position:relative;overflow:hidden;text-align:center}
+.cta-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.cta-glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,150,60,.07) 0%,transparent 70%)}
+.cta-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.cta-h{font-family:'Cormorant',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:1.06;letter-spacing:-.02em;margin-bottom:24px;color:var(--fg)}
+.cta-h em{font-style:italic;color:var(--gold2)}
+.cta-p{font-size:15px;font-weight:200;color:var(--fg2);line-height:1.85;margin-bottom:48px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-acts{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+
+/* ── CONTACT ── */
+.contact-sec{padding:80px 0;background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ct-h{font-family:'Cormorant',serif;font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.12;margin-bottom:22px;color:var(--fg)}
+.ct-h em{font-style:italic;color:var(--gold2)}
+.ct-p{font-size:14px;font-weight:200;color:var(--fg2);line-height:1.88;margin-bottom:40px}
+.ct-details{display:flex;flex-direction:column;gap:20px}
+.ct-row{display:flex;align-items:flex-start;gap:16px}
+.ct-ic{width:40px;height:40px;border:1px solid var(--rule2);display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:3px;background:rgba(201,150,60,.05)}
+.ct-ic svg{width:16px;height:16px;stroke:var(--gold2);fill:none;stroke-width:1.5}
+.ct-lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px;font-weight:300}
+.ct-val{font-size:13.5px;color:var(--fg2);font-weight:200}
+.form-box{background:var(--form-bg);border:1px solid var(--card-border);border-radius:4px;padding:48px 44px;position:relative;overflow:hidden}
+.form-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.enroll-steps{display:flex;flex-direction:column;gap:18px}
+.estep{display:flex;gap:20px;align-items:flex-start;padding:24px 22px;background:var(--bg);border:1px solid var(--form-border);border-radius:4px;transition:all .3s;cursor:default}
+.estep:hover{background:rgba(201,150,60,.03);border-color:var(--rule2);transform:translateX(6px)}
+.estep-n{font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:var(--gold);line-height:1}
+.estep-h{font-size:15px;font-weight:400;color:var(--fg);margin-bottom:6px}
+.estep-p{font-size:13.5px;font-weight:200;color:var(--fg2);line-height:1.7}
+.fsub{width:100%;padding:15px;background:var(--gold);color:#080808;font-family:'Lexend',sans-serif;font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:3px;cursor:none;transition:all .28s;display:flex;align-items:center;justify-content:center;gap:10px}
+.fsub:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 32px var(--gold-glow)}
+.fsub svg{width:16px;height:16px}
+
+/* ── FAQ PAGE ── */
+#faq-page{background:var(--bg)}
+.faq-hero{padding:100px 0 80px;position:relative;overflow:hidden;background:var(--bg2)}
+.faq-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 60% at 50% 30%,rgba(201,150,60,.08),transparent 65%)}
+.faq-hero-inner{position:relative;z-index:2;text-align:center;max-width:700px;margin:0 auto}
+.faq-h{font-family:'Cormorant',serif;font-size:clamp(50px,6.5vw,88px);font-weight:300;line-height:1.05;letter-spacing:-.025em;margin-bottom:22px;color:var(--fg)}
+.faq-h em{font-style:italic;color:var(--gold2)}
+.faq-p{font-size:15px;font-weight:200;color:var(--fg2);line-height:1.82;max-width:500px;margin:0 auto}
+.faq-search-wrap{max-width:540px;margin:36px auto 0;position:relative}
+.faq-search{width:100%;padding:16px 52px 16px 22px;background:var(--form-bg);border:1px solid var(--rule);border-radius:3px;font-family:'Lexend',sans-serif;font-size:13.5px;font-weight:200;color:var(--fg);outline:none;transition:border-color .2s}
+.faq-search::placeholder{color:var(--fg4)}
+.faq-search:focus{border-color:var(--gold)}
+.faq-search-ico{position:absolute;right:18px;top:50%;transform:translateY(-50%);color:var(--fg3)}
+.faq-search-ico svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5}
+.faq-cats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:60px 0 72px;padding:0 52px}
+.fcat{padding:9px 22px;border:1px solid var(--rule);color:var(--fg3);font-family:'Lexend',sans-serif;font-size:11px;font-weight:200;letter-spacing:.09em;text-transform:uppercase;border-radius:2px;cursor:none;transition:all .25s;background:none}
+.fcat:hover{border-color:var(--rule2);color:var(--gold2)}
+.fcat.act{background:rgba(201,150,60,.1);border-color:var(--rule2);color:var(--gold2)}
+.faq-body{padding:0 52px 100px;max-width:1280px;margin:0 auto}
+.faq-group{margin-bottom:72px}
+.faq-gtitle{font-family:'Cormorant',serif;font-size:26px;font-weight:300;color:var(--fg);margin-bottom:28px;display:flex;align-items:center;gap:16px}
+.fgn{font-size:11px;background:rgba(201,150,60,.12);border:1px solid var(--rule2);color:var(--gold2);padding:4px 12px;border-radius:100px;letter-spacing:.1em;font-family:'Lexend',sans-serif;font-weight:300}
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-item{border:1px solid var(--card-border);border-radius:4px;overflow:hidden;transition:border-color .3s;background:var(--card-bg)}
+.faq-item.open{border-color:var(--rule2)}
+.faq-q{width:100%;padding:22px 28px;background:transparent;border:none;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:none;text-align:left;transition:background .2s}
+.faq-q:hover{background:rgba(201,150,60,.04)}
+.faq-item.open .faq-q{background:rgba(201,150,60,.06)}
+.faq-q-text{font-size:15px;font-weight:300;color:var(--fg);line-height:1.4}
+.faq-icon{width:26px;height:26px;border:1px solid var(--rule);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s cubic-bezier(0.16,1,0.3,1)}
+.faq-item.open .faq-icon{background:var(--gold);border-color:var(--gold);transform:rotate(45deg)}
+.faq-icon svg{width:12px;height:12px;stroke:var(--fg2);fill:none;stroke-width:2}
+.faq-item.open .faq-icon svg{stroke:#080808}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1)}
+.faq-item.open .faq-a{max-height:600px}
+.faq-a-inner{padding:0 28px 26px;font-size:14px;font-weight:200;color:var(--fg2);line-height:1.88}
+.faq-a-inner strong{color:var(--gold2);font-weight:400}
+.faq-a-inner ul{margin:10px 0 10px 20px;display:flex;flex-direction:column;gap:7px}
+.faq-a-inner ul li::marker{color:var(--gold)}
+.faq-cta-box{background:var(--bg2);border:1px solid var(--rule);border-radius:4px;padding:80px;text-align:center;position:relative;overflow:hidden}
+.faq-cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.faq-cta-h{font-family:'Cormorant',serif;font-size:clamp(34px,4vw,56px);font-weight:300;margin-bottom:16px;color:var(--fg)}
+.faq-cta-h em{font-style:italic;color:var(--gold2)}
+.faq-cta-p{font-size:14.5px;font-weight:200;color:var(--fg2);max-width:480px;margin:0 auto 40px;line-height:1.82}
+.faq-cta-acts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:var(--footer-bg);border-top:1px solid var(--rule);padding:72px 0 40px;transition:background .4s}
+.ft-top{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid var(--rule);margin-bottom:32px}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ft-logo img{height:30px;border-radius:3px}
+.ft-logo-name{font-family:'Cormorant',serif;font-size:18px;font-weight:400;color:var(--fg);letter-spacing:.03em}
+.ft-tag{font-size:13px;font-weight:300;color:var(--fg2);line-height:1.7;max-width:230px;margin-bottom:24px}
+.ft-soc{display:flex;gap:10px}
+.soc{width:36px;height:36px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--fg2);text-decoration:none;font-size:12px;font-weight:400;transition:all .25s;cursor:none;border-radius:2px}
+.soc:hover{background:var(--gold);border-color:var(--gold);color:#080808;transform:translateY(-2px)}
+.ft-col-t{font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--fg2);margin-bottom:18px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:10px}
+.ft-col ul li a{font-size:14px;font-weight:300;color:var(--fg2);text-decoration:none;transition:color .2s;cursor:none}
+.ft-col ul li a:hover{color:var(--gold2)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:12px;color:var(--fg3);font-weight:300}
+.ft-lnks{display:flex;gap:22px}
+.ft-lnks a{font-size:12px;color:var(--fg3);text-decoration:none;transition:color .2s;cursor:none;font-weight:300}
+.ft-lnks a:hover{color:var(--fg2)}
+
+/* WA */
+.wa{position:fixed;bottom:28px;right:28px;z-index:700;width:65px;height:65px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.35);animation:waFloat 4s ease-in-out infinite;cursor:none}
+.wa svg{width:36px;height:36px;fill:#fff}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
+@keyframes scrollPulse{0%,100%{opacity:.6;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .wrap{padding:0 32px}#nav{padding:0 32px}
+  .stats-hdr,.about-grid,.mv-grid,.contact-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .feats-grid{grid-template-columns:repeat(2,1fr)}
+  .test-grid{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr 1fr;gap:32px}
+  .mv-panel{padding:72px 52px}
+  .pp.act{grid-template-columns:1fr}
+  .curric-grid{grid-template-columns:1fr 1fr}
+  .curric-wide{grid-column:span 2}
+}
+@media(max-width:768px){
+  .wrap{padding:0 20px}#nav{padding:0 20px}
+  .nav-links{display:none}.ham{display:flex}
+  .hero-content{padding:0 20px}
+  .cl{display:none}
+  .sec,.stats-sec,.feats-sec,.test-sec,.about-sec,.progs-sec,.contact-sec,.cta-sec,.curric-sec{padding:80px 0}
+  .fr{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .feats-grid{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr}
+  .ft-bot{flex-direction:column;text-align:center}
+  .faq-body{padding:0 20px 80px}
+  .faq-cta-box{padding:52px 28px}
+  .faq-cats{padding:0 20px}
+  .cta-acts,.faq-cta-acts,.hero-actions{flex-direction:column;align-items:center}
+  .curric-grid{grid-template-columns:1fr}
+  .curric-wide{grid-column:span 1}
+  .mv-panel{padding:56px 28px}
+}
+/* WIDGET styles */
+.widget-box{position:relative;padding:0 !important;overflow:hidden;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.w-progress{height:4px;background:rgba(255,255,255,.05);width:100%;position:absolute;top:0;left:0}
+[data-theme="dark"] .w-progress{background:rgba(255,255,255,.05)}
+.w-progress-bar{height:100%;background:var(--gold);transition:width .4s ease}
+.w-head{padding:40px 40px 24px;border-bottom:1px solid rgba(0,0,0,.08)}
+[data-theme="dark"] .w-head{border-bottom:1px solid rgba(255,255,255,.05)}
+.w-step-lbl{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;font-weight:300}
+.w-title{font-family:'Cormorant',serif;font-size:28px;font-weight:300;color:var(--fg);line-height:1.2}
+.w-body{position:relative;min-height:380px;padding:32px 40px 40px}
+.w-step{display:none;animation:wFadeIn .5s ease forwards}
+.w-step.act{display:block}
+@keyframes wFadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.w-q{font-size:14px;color:var(--fg);margin-bottom:14px;font-weight:400}
+.w-opts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.w-opt{padding:12px 20px;background:rgba(201,150,60,.03);border:1px solid var(--rule);color:var(--fg2);font-size:13px;font-weight:300;border-radius:4px;cursor:pointer;transition:all .3s}
+.w-opt:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,150,60,.08)}
+.w-opt.sel{background:var(--gold);color:#080808;border-color:var(--gold);font-weight:400}
+.w-next{width:100%;justify-content:center;margin-top:10px}
+.w-inp::placeholder{color:rgba(255,255,255,.3)}
+[data-theme="light"] .w-inp{background:#fff!important;border:1px solid var(--rule)!important;color:#080808!important}
+[data-theme="light"] .w-inp::placeholder{color:rgba(0,0,0,.4)}
+.col-opts{flex-direction:column}
+.col-opts .w-opt{width:100%;text-align:left}
+/* loader */
+.w-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px}
+.spinner{width:40px;height:40px;border:2px solid rgba(201,150,60,.2);border-top:2px solid var(--gold);border-radius:50%;animation:wspin 1s linear infinite}
+@keyframes wspin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+/* result */
+.w-res-icon{width:56px;height:56px;border-radius:50%;background:rgba(201,150,60,.1);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.w-res-icon svg{width:28px;height:28px}
+.w-res-txt{font-size:16px;color:var(--fg);line-height:1.7;font-weight:300;margin-bottom:32px;font-style:italic;border-left:2px solid var(--gold);padding-left:20px}
+.w-res-rec{background:rgba(201,150,60,.05);border:1px solid var(--rule2);padding:24px;border-radius:4px;margin-bottom:32px}
+.rec-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-bottom:8px}
+.rec-val{font-size:18px;color:var(--gold);font-weight:400}
+</style>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+<div id="cur-trail"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" onclick="goHome()" class="nav-logo">
+    <img src="data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//9k=" alt="AatiCademy"/>
+    <span class="nav-logo-name">AatiCademy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goHome();sto('about-sec')">About</a></li>
+    <li><a href="#" onclick="goHome();sto('progs-sec')">Programs</a></li>
+    <li><a href="#" onclick="goHome();sto('curric-sec')">Curricula</a></li>
+    <li><a href="#" onclick="goHome();sto('feats-sec')">Why Us</a></li>
+    <li><a href="#" onclick="goFaq()">Parent FAQ</a></li>
+    <li><a href="#" onclick="goHome();sto('contact-sec')" class="nav-cta">Book Demo</a></li>
+  </ul>
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle light/dark">🌙</button>
+  <button class="ham" onclick="toggleM()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div id="mmenu">
+  <a href="#" onclick="goHome();closeM()">Home</a>
+  <a href="#" onclick="goHome();closeM();sto('about-sec')">About</a>
+  <a href="#" onclick="goHome();closeM();sto('progs-sec')">Programs</a>
+  <a href="#" onclick="goHome();closeM();sto('curric-sec')">Curricula</a>
+  <a href="#" onclick="goFaq();closeM()">Parent FAQ</a>
+  <a href="#" onclick="goHome();closeM();sto('contact-sec')" style="color:var(--gold2)">Book Demo →</a>
+</div>
+
+<!-- ═══ MAIN PAGE ═══ -->
+<div id="main-page" class="page active">
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="noise"></div>
+  <div class="vignette"></div>
+  <div class="cl cl-tl">Est. 2020<span class="cl-val">Kolkata, India</span></div>
+  <div class="cl cl-tr">Grades 1–12<span class="cl-val">Girls Only</span></div>
+  <div class="cl cl-bl">600+ Classes<span class="cl-val">Delivered</span></div>
+  <div class="cl cl-br">5+ Countries<span class="cl-val">Reached</span></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>Where Faith Meets Academic Excellence</div>
+    <h1 class="hero-h">Where <span class="ital">Faith</span><br><span class="dim">Meets</span><br>Excellence</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Expert female educators providing personalized 1-on-1 tutoring in Math, Science, English and STEM — in a safe learning space built on Islamic values.</p>
+    <p class="hero-trust">✦ Trusted by families across the UAE &amp; Gulf region ✦</p>
+    <div class="hero-actions">
+      <a href="#" onclick="sto('contact-sec')" class="btn-gold">Get Your Child's Report <span class="arr">→</span></a>
+      <a href="https://wa.me/16479782994" target="_blank" rel="noopener" class="btn-wire">Chat on WhatsApp <span class="arr">→</span></a>
+    </div>
+    <div class="hero-grades">
+      <span class="grade-pill">Grades 1–12</span>
+      <span class="grade-sep">·</span>
+      <span class="grade-pill">Math</span>
+      <span class="grade-sep">·</span>
+      <span class="grade-pill">Science</span>
+      <span class="grade-sep">·</span>
+      <span class="grade-pill">English</span>
+      <span class="grade-sep">·</span>
+      <span class="grade-pill">STEM</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span class="scroll-txt">Scroll</span></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span class="tick-item"><span class="tick-sep"></span>Mathematics</span>
+  <span class="tick-item"><span class="tick-sep"></span>Physics</span>
+  <span class="tick-item"><span class="tick-sep"></span>Chemistry</span>
+  <span class="tick-item"><span class="tick-sep"></span>Biology</span>
+  <span class="tick-item"><span class="tick-sep"></span>English Language &amp; Literature</span>
+  <span class="tick-item"><span class="tick-sep"></span>IGCSE · IB · CBSE · ICSE</span>
+  <span class="tick-item"><span class="tick-sep"></span>100% Female Educators</span>
+  <span class="tick-item"><span class="tick-sep"></span>Islamic Values</span>
+  <span class="tick-item"><span class="tick-sep"></span>1-on-1 Tutoring</span>
+  <span class="tick-item"><span class="tick-sep"></span>Grades 1–12</span>
+  <span class="tick-item"><span class="tick-sep"></span>SAT · ACT · IELTS · TOEFL</span>
+  <span class="tick-item"><span class="tick-sep"></span>Coding &amp; STEM</span>
+  <span class="tick-item"><span class="tick-sep"></span>UAE &amp; Gulf Families</span>
+  <span class="tick-item"><span class="tick-sep"></span>Mathematics</span>
+  <span class="tick-item"><span class="tick-sep"></span>Physics</span>
+  <span class="tick-item"><span class="tick-sep"></span>Chemistry</span>
+  <span class="tick-item"><span class="tick-sep"></span>Biology</span>
+  <span class="tick-item"><span class="tick-sep"></span>English Language &amp; Literature</span>
+  <span class="tick-item"><span class="tick-sep"></span>IGCSE · IB · CBSE · ICSE</span>
+  <span class="tick-item"><span class="tick-sep"></span>100% Female Educators</span>
+  <span class="tick-item"><span class="tick-sep"></span>Islamic Values</span>
+  <span class="tick-item"><span class="tick-sep"></span>1-on-1 Tutoring</span>
+  <span class="tick-item"><span class="tick-sep"></span>Grades 1–12</span>
+  <span class="tick-item"><span class="tick-sep"></span>SAT · ACT · IELTS · TOEFL</span>
+  <span class="tick-item"><span class="tick-sep"></span>Coding &amp; STEM</span>
+  <span class="tick-item"><span class="tick-sep"></span>UAE &amp; Gulf Families</span>
+</div></div>
+
+<!-- STATS -->
+<section class="stats-sec" id="stats-sec">
+  <div class="wrap">
+    <div class="stats-hdr reveal">
+      <div>
+        <div class="eyebrow">By The Numbers</div>
+        <h2 class="hdg">Results that<br><em>speak clearly</em></h2>
+      </div>
+      <p class="subp" style="max-width:480px;font-size:18px;font-weight:300;color:var(--fg);opacity:0.9">We measure success not in sessions booked, but in outcomes achieved and confidence gained.</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="s-card reveal s-card-num"><div class="s-n"><span class="num-acc" data-val="600">0</span><sup>+</sup></div><div class="s-l">Classes Delivered</div></div>
+    <div class="s-card reveal s-card-num d1"><div class="s-n"><span class="num-acc" data-val="5">0</span><sup>+</sup></div><div class="s-l">Countries Reached</div></div>
+    <div class="s-card reveal s-card-num d2"><div class="s-n"><span class="num-acc" data-val="100">0</span><sup>%</sup></div><div class="s-l">Female Educators</div></div>
+    <div class="s-card reveal-fade d3"><div class="s-n" style="font-size:clamp(34px,3.5vw,48px);padding-top:10px;">1-on-1</div><div class="s-l">Learning Model</div></div>
+    <div class="s-card reveal-fade d4"><div class="s-n" style="font-size:clamp(34px,3.5vw,48px);padding-top:10px;">24/7</div><div class="s-l">Flexible Support</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec sec" id="about-sec">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="eyebrow" style="color:var(--about-gold)">About AatiCademy</div>
+        <div class="about-quote">"Quality education in a safe environment — led by women, for women."</div>
+        <p class="about-p">AatiCademy provides premium online education to young girls across the globe for grades 1 to 12. With experienced female educators and personalized learning, we make education accessible and effective for every student.</p>
+        <p class="about-p">Every student receives a tailored experience — whether she needs support in core subjects or wants to excel in competitive exams like IGCSE or IB.</p>
+        <div class="boards">
+          <div class="board"><div class="board-n">IGCSE</div><div class="board-l">Core &amp; Extended</div></div>
+          <div class="board"><div class="board-n">IB</div><div class="board-l">International</div></div>
+          <div class="board"><div class="board-n">ICSE</div><div class="board-l">Indian Certificate</div></div>
+          <div class="board"><div class="board-n">CBSE</div><div class="board-l">Central Board</div></div>
+        </div>
+      </div>
+      <div class="about-right reveal d2">
+
+        <div class="ab-dark">
+          <div class="ab-title">Built with<br><em>intention</em> &amp; faith</div>
+          <div class="ab-p">We teach with intention. We mentor with care. And we build with faith — hoping every step becomes a source of barakah in our work and benefit for our community.</div>
+          <div class="ab-list">
+            <div class="ab-item"><div class="ab-dia"></div><div class="ab-txt">Safe, female-only learning environment</div></div>
+            <div class="ab-item"><div class="ab-dia"></div><div class="ab-txt">Grounded in Islamic values &amp; character</div></div>
+            <div class="ab-item"><div class="ab-dia"></div><div class="ab-txt">Halal work opportunities for women educators</div></div>
+            <div class="ab-item"><div class="ab-dia"></div><div class="ab-txt">Globally accessible, locally relevant</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION / MISSION -->
+<section style="padding:0" id="mission-sec">
+  <div class="mv-grid">
+    <div class="mv-panel mv-dark reveal">
+      <div class="mv-ghost">01</div>
+      <h2 class="mv-eye">Our Vision</h2>
+      <div class="mv-h">"Raising confident, faith-guided young women"</div>
+      <p class="mv-p">At AatiCademy, we strive to create a safe and nurturing learning space where young girls feel supported, valued, and empowered to become everything Allah has created them to be. We aim to raise a generation of young women who are strong in knowledge, grounded in character, and confident enough to lead with purpose.</p>
+    </div>
+    <div class="mv-panel mv-gold reveal d2">
+      <div class="mv-ghost">02</div>
+      <h2 class="mv-eye">Our Mission</h2>
+      <div class="mv-h">"Quality Education Built on Trust, Sincerity, and Excellence"</div>
+      <p class="mv-p">Our mission is to make quality education accessible to young girls through a women-led learning environment built on trust, sincerity, and excellence. We believe education should prepare a girl not only for exams, but for life — strengthening her confidence, refining her character, and helping her discover her true potential.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULA -->
+<section class="curric-sec sec" id="curric-sec">
+  <div class="wrap">
+    <div class="eyebrow reveal">Curricula We Support</div>
+    <h2 class="hdg reveal d1">Every curriculum,<br><em>one platform</em></h2>
+    <p class="subp reveal d2" style="max-width:580px;margin-top:12px">We support students from leading international curricula followed across the UAE, Gulf region, and globally — with personalized 1-on-1 expertise in every system.</p>
+    <div class="curric-grid">
+      <div class="curric-card reveal d1">
+        <div class="cc-flag">British Curriculum</div>
+        <div class="cc-title">Cambridge International</div>
+        <div class="cc-list">
+          <div class="cc-item">IGCSE — Core &amp; Extended</div>
+          <div class="cc-item">AS &amp; A Levels</div>
+          <div class="cc-item">O-Level</div>
+        </div>
+      </div>
+      <div class="curric-card reveal d2">
+        <div class="cc-flag">American Curriculum</div>
+        <div class="cc-title">US Academic System</div>
+        <div class="cc-list">
+          <div class="cc-item">Middle School &amp; High School</div>
+          <div class="cc-item">SAT Preparation</div>
+          <div class="cc-item">Advanced Placement (AP)</div>
+        </div>
+      </div>
+      <div class="curric-card reveal d3">
+        <div class="cc-flag">International Baccalaureate</div>
+        <div class="cc-title">IB Programme</div>
+        <div class="cc-list">
+          <div class="cc-item">IB Middle Years Programme (MYP)</div>
+          <div class="cc-item">IB Diploma Programme (DP)</div>
+          <div class="cc-item">HL &amp; SL Subjects, IA Coaching</div>
+        </div>
+      </div>
+      <div class="curric-card reveal d1">
+        <div class="cc-flag">Indian Curriculum</div>
+        <div class="cc-title">CBSE &amp; ICSE</div>
+        <div class="cc-list">
+          <div class="cc-item">CBSE — Central Board</div>
+          <div class="cc-item">ICSE — Indian Certificate</div>
+          <div class="cc-item">Grades 1–12 full support</div>
+        </div>
+      </div>
+      <div class="curric-card curric-wide reveal d2">
+        <div class="cc-flag">Our Promise</div>
+        <div class="cc-title">Structured support for every student, Grades 1–12</div>
+        <p class="cp-body">We provide structured academic support helping students strengthen concepts, improve academic performance, and build confidence — regardless of which curriculum they follow.</p>
+        <div class="cp-tags">
+          <span class="cp-tag">Grades 1–12</span><span class="cp-tag">IGCSE</span><span class="cp-tag">A-Level</span>
+          <span class="cp-tag">IB MYP</span><span class="cp-tag">IB DP</span><span class="cp-tag">CBSE</span>
+          <span class="cp-tag">ICSE</span><span class="cp-tag">SAT</span><span class="cp-tag">AP Exams</span>
+          <span class="cp-tag">IELTS</span><span class="cp-tag">TOEFL</span>
+        </div>
+      </div>
+    </div>
+    <div class="pop-subjects reveal d3">
+      <div class="pop-title">Popular Subjects</div>
+      <div class="pop-grid">
+        <span class="pop-item">Mathematics</span><span class="pop-item">Physics</span>
+        <span class="pop-item">Chemistry</span><span class="pop-item">Biology</span>
+        <span class="pop-item">English Language &amp; Literature</span>
+        <span class="pop-item">Computer Science</span><span class="pop-item">Economics</span>
+        <span class="pop-item">Arabic</span><span class="pop-item">French</span>
+        <span class="pop-item">History &amp; Geography</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="progs-sec sec" id="progs-sec">
+  <div class="wrap">
+    <div class="eyebrow reveal">Academic Programs</div>
+    <h2 class="hdg reveal d1" style="margin-bottom:14px">Three pillars of <em>excellence</em></h2>
+    <p class="subp reveal d2" style="max-width:540px;margin-bottom:52px">Every student is different. Our programs are built around three pillars — designed to meet girls exactly where they are.</p>
+    <div class="prog-tabs reveal d2">
+      <button class="ptab act" onclick="showP(0)"><span class="ptab-n">01</span>Academic Excellence</button>
+      <button class="ptab" onclick="showP(1)"><span class="ptab-n">02</span>Global Exam Prep</button>
+      <button class="ptab" onclick="showP(2)"><span class="ptab-n">03</span>Confidence &amp; Future Skills</button>
+    </div>
+    <div id="pp-0" class="pp act">
+      <div><div class="eyebrow">01 / Academic Excellence</div><div class="pp-h">Strong academic foundations with personalized one-on-one tutoring</div><p class="pp-p">Our expert female tutors deliver structured, curriculum-aligned sessions for students in Grades 1–12 — helping each girl master her subjects with confidence and clarity.</p><div class="pp-tags"><span class="pp-tag">Grades 1–12</span><span class="pp-tag">1-on-1</span><span class="pp-tag">All Curricula</span></div></div>
+      <div class="pp-r">
+        <div class="pp-topic"><div class="pp-ttl">Mathematics</div><div class="pp-txt">From arithmetic foundations to advanced calculus — logical, step-by-step mastery.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Physics</div><div class="pp-txt">Forces, energy, waves — real-world applications with exam-focused technique.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Chemistry</div><div class="pp-txt">Atomic structure, reactions, organic chemistry — simplified and retained.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Biology</div><div class="pp-txt">Cell biology, genetics, ecology — connecting science to health and life.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">English Language &amp; Literature</div><div class="pp-txt">Comprehension, essay writing, grammar, and literary analysis.</div></div>
+      </div>
+    </div>
+    <div id="pp-1" class="pp">
+      <div><div class="eyebrow">02 / Global Exam Preparation</div><div class="pp-h">Focused guidance for international examinations</div><p class="pp-p">Strategic, examiner-focused preparation that helps students succeed in school assessments and gain entry to top universities worldwide. Past papers, mock exams, and mark-scheme coaching.</p><div class="pp-tags"><span class="pp-tag">SAT</span><span class="pp-tag">ACT</span><span class="pp-tag">IELTS</span><span class="pp-tag">TOEFL</span><span class="pp-tag">AP Exams</span></div></div>
+      <div class="pp-r">
+        <div class="pp-topic"><div class="pp-ttl">SAT &amp; ACT</div><div class="pp-txt">Targeted prep for US university admission — reading, math, and writing strategy.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">IELTS &amp; TOEFL</div><div class="pp-txt">English proficiency coaching — listening, reading, writing, and speaking.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">AP Exams</div><div class="pp-txt">Advanced Placement subject preparation — rigorous college-level content mastery.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">IGCSE, A-Levels &amp; IB Assessments</div><div class="pp-txt">School-level international exams — Cambridge and IB aligned, past-paper driven.</div></div>
+      </div>
+    </div>
+    <div id="pp-2" class="pp">
+      <div><div class="eyebrow">03 / Confidence &amp; Future Skills</div><div class="pp-h">Developing the skills to communicate, think, and lead</div><p class="pp-p">Academic success is only part of the picture. We also invest in the whole student — helping her grow into a confident, articulate young woman ready for the world.</p><div class="pp-tags"><span class="pp-tag">STEM</span><span class="pp-tag">Public Speaking</span><span class="pp-tag">Leadership</span></div></div>
+      <div class="pp-r">
+        <div class="pp-topic"><div class="pp-ttl">Coding &amp; STEM Foundations</div><div class="pp-txt">Introductory programming, computational thinking, and applied mathematics.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Public Speaking &amp; Presentation Skills</div><div class="pp-txt">Structured debate, persuasive speech, and confident classroom presentation.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Confidence Building &amp; Personality Development</div><div class="pp-txt">A nurturing space to grow resilience, self-belief, and positive self-expression.</div></div>
+        <div class="pp-topic"><div class="pp-ttl">Communication &amp; Leadership Skills</div><div class="pp-txt">Active listening, team dynamics, and the foundations of ethical leadership.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feats-sec sec" id="feats-sec">
+  <div class="wrap">
+    <div class="feats-hdr">
+      <div><div class="eyebrow reveal" style="color:var(--about-gold)">Why Choose Us</div><h2 class="hdg dk reveal d1">The AatiCademy<br><em>difference</em></h2></div>
+      <p class="subp dk reveal d2" style="max-width:320px">Eight reasons families from 5+ countries trust us with their daughters' education.</p>
+    </div>
+    <div class="feats-grid reveal d1">
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM17 11l2 2 4-4"/></svg><div class="feat-n">01</div><div class="feat-t">Expert Female Tutors</div><p class="feat-p">Carefully vetted subject experts in a safe, female-only environment.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="feat-n">02</div><div class="feat-t">Personalized Plans</div><p class="feat-p">Tailored learning plans for each student's unique pace, style, and goals.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><rect width="18" height="12" x="3" y="4" rx="2" ry="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 20h8M12 16v4"/></svg><div class="feat-n">03</div><div class="feat-t">Interactive Sessions</div><p class="feat-p">Engaging live classes with real-time feedback and active participation.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><polyline points="12 7 12 12 15 15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg><div class="feat-n">04</div><div class="feat-t">Flexible Scheduling</div><p class="feat-p">Any timezone, any day — sessions around your family's life.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 20V10M18 20V4M6 20v-4"/></svg><div class="feat-n">05</div><div class="feat-t">Progress Reports</div><p class="feat-p">Regular assessments and parent updates to keep everyone aligned.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg><div class="feat-n">06</div><div class="feat-t">Exam Preparation</div><p class="feat-p">Past papers, timed practice, strategy for every major board.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div class="feat-n">07</div><div class="feat-t">Safe Environment</div><p class="feat-p">Rooted in Islamic values — modest, respectful, trusted worldwide.</p></div></div>
+      <div class="feat-3d"><div class="feat-inner"><svg class="feat-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.6 9h16.8M3.6 15h16.8M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z"/></svg><div class="feat-n">08</div><div class="feat-t">Global Reach</div><p class="feat-p">USA, Canada, UK, UAE, India — and growing.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="test-sec sec" id="test-sec">
+  <div class="wrap">
+    <div class="eyebrow reveal">Parent Voices</div>
+    <h2 class="hdg reveal d1" style="margin-bottom:10px">What families <em>say</em></h2>
+    <p class="subp reveal d2">Real experiences from parents around the world.</p>
+    <div class="test-carousel-wrap reveal d2">
+      <div class="test-track">
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are not only highly knowledgeable but also excel at breaking down complex subjects into easily digestible concepts. Highly recommend!"</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Alie</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are experts at simplifying complex topics... Sessions are well-structured and engaging, leading to noticeable improvement."</div><div class="t-author"><div class="t-av">H</div><div><div class="t-name">Hena Ejaz</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"I’ve had a fantastic experience. The tutors are not only knowledgeable but also very approachable and patient. They explain things in a way that makes it easy."</div><div class="t-author"><div class="t-av">R</div><div><div class="t-name">Ruqaiya Bint Aftab</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"AatiCademy has been amazing! The tutors are friendly, patient, and really know their stuff. I love how they make learning easy and fun."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Afrah Fatima</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"An amazing tutor who has really helped me get better at both Biology and Chemistry. She explains every topic in a very detailed and understandable way."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Aarav Baheti</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"I really liked the classes. They personalized the classes according to my needs. They also provide notes and help in homework. A great experience!"</div><div class="t-author"><div class="t-av">N</div><div><div class="t-name">Nighat Rahbar</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are extremely professional and knowledgeable. I am with them for a long time now and I am very satisfied!"</div><div class="t-author"><div class="t-av">T</div><div><div class="t-name">Tarannum Ansari</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"Outstanding teacher who makes complex concepts accessible and engaging. Their patience and encouragement inspire confidence and growth."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Aleena Mokhtar</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"A reasonable yet efficient, success driven, highly professional and student friendly platform to learn and ace academic scores. :-)"</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Ayesha Fathima</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The teachers are amazing and the kind of guidance they provide their students with is top notch."</div><div class="t-author"><div class="t-av">M</div><div><div class="t-name">Marveena Tiwari</div><div class="t-loc">Google Review</div></div></div></div>
+        <!-- DUPLICATE FOR INFINITE SCROLL -->
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are not only highly knowledgeable but also excel at breaking down complex subjects into easily digestible concepts. Highly recommend!"</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Alie</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are experts at simplifying complex topics... Sessions are well-structured and engaging, leading to noticeable improvement."</div><div class="t-author"><div class="t-av">H</div><div><div class="t-name">Hena Ejaz</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"I’ve had a fantastic experience. The tutors are not only knowledgeable but also very approachable and patient. They explain things in a way that makes it easy."</div><div class="t-author"><div class="t-av">R</div><div><div class="t-name">Ruqaiya Bint Aftab</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"AatiCademy has been amazing! The tutors are friendly, patient, and really know their stuff. I love how they make learning easy and fun."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Afrah Fatima</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"An amazing tutor who has really helped me get better at both Biology and Chemistry. She explains every topic in a very detailed and understandable way."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Aarav Baheti</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"I really liked the classes. They personalized the classes according to my needs. They also provide notes and help in homework. A great experience!"</div><div class="t-author"><div class="t-av">N</div><div><div class="t-name">Nighat Rahbar</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The tutors are extremely professional and knowledgeable. I am with them for a long time now and I am very satisfied!"</div><div class="t-author"><div class="t-av">T</div><div><div class="t-name">Tarannum Ansari</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"Outstanding teacher who makes complex concepts accessible and engaging. Their patience and encouragement inspire confidence and growth."</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Aleena Mokhtar</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"A reasonable yet efficient, success driven, highly professional and student friendly platform to learn and ace academic scores. :-)"</div><div class="t-author"><div class="t-av">A</div><div><div class="t-name">Ayesha Fathima</div><div class="t-loc">Google Review</div></div></div></div>
+        <div class="tcard"><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="t-txt">"The teachers are amazing and the kind of guidance they provide their students with is top notch."</div><div class="t-author"><div class="t-av">M</div><div><div class="t-name">Marveena Tiwari</div><div class="t-loc">Google Review</div></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec sec">
+  <canvas class="cta-canvas" id="cta-canvas"></canvas>
+  <div class="cta-glow"></div>
+  <div class="wrap"><div class="cta-inner reveal">
+    <h2 class="cta-h">Give your daughter the gift<br>of <em>personalized</em> education</h2>
+    <p class="cta-p">Get a personalized academic report — no commitment, no pressure. Let the results speak for themselves.</p>
+    <div class="cta-acts">
+      <a href="#" onclick="sto('contact-sec')" class="btn-gold">Get Your Child's Academic Report <span class="arr">→</span></a>
+      <a href="https://wa.me/16479782994" target="_blank" rel="noopener" class="btn-wire">Chat on WhatsApp <span class="arr">→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec sec" id="contact-sec">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2 class="ct-h">Start your<br>learning <em>journey</em></h2>
+        <p class="ct-p">Get a personalized academic report — no commitment. We'll match your daughter with the right tutor and let the results speak for themselves.</p>
+        <div class="ct-details">
+          <div class="ct-row"><div class="ct-ic"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div><div><div class="ct-lbl">Address</div><div class="ct-val">4/1 Beniapukur, 2nd Lane, Kolkata, India</div></div></div>
+          <div class="ct-row"><div class="ct-ic"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></div><div><div class="ct-lbl">WhatsApp</div><div class="ct-val">+91 99035 67327 · +1 647 978 2994</div></div></div>
+          <div class="ct-row"><div class="ct-ic"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div><div><div class="ct-lbl">Email</div><div class="ct-val">info@aaticademy.com</div></div></div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="form-box widget-box" id="profile-widget">
+          <div class="w-progress"><div class="w-progress-bar" id="w-bar" style="width:16.66%"></div></div>
+          <div class="w-head">
+            <div class="w-step-lbl" id="w-step-lbl">Step 1 of 6</div>
+            <div class="w-title" id="w-title">Let’s understand your child better</div>
+          </div>
+          
+          <div class="w-body">
+            <!-- Step 1 -->
+            <div class="w-step act" id="step-1">
+              <div class="w-q">Parent Name</div>
+              <input type="text" id="p-name" class="w-inp" placeholder="Enter your name" style="width:100%;margin-bottom:20px;padding:14px;border:1px solid rgba(201,150,60,.3);background:rgba(0,0,0,.2);color:#fff;border-radius:4px" onkeyup="checkS1()">
+              
+              <div class="w-q">WhatsApp Number</div>
+              <input type="tel" id="p-phone" class="w-inp" placeholder="e.g. +1 234 567 8900" style="width:100%;margin-bottom:20px;padding:14px;border:1px solid rgba(201,150,60,.3);background:rgba(0,0,0,.2);color:#fff;border-radius:4px" onkeyup="checkS1()">
+              
+              <button class="btn-gold w-next" id="btn-s1" onclick="nextStep(2)" disabled style="opacity:0.5;cursor:not-allowed">Continue <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="w-step" id="step-2">
+              <div class="w-q">Current Grade</div>
+              <div class="w-opts" data-key="grade">
+                <button class="w-opt" onclick="selOpt(this,'grade')">Grade 1–5</button>
+                <button class="w-opt" onclick="selOpt(this,'grade')">Grade 6–10</button>
+                <button class="w-opt" onclick="selOpt(this,'grade')">Grade 11–12</button>
+              </div>
+
+              <div class="w-q">Main Subject Focus</div>
+              <div class="w-opts" data-key="subj">
+                <button class="w-opt" onclick="selOpt(this,'subj')">Mathematics</button>
+                <button class="w-opt" onclick="selOpt(this,'subj')">Science</button>
+                <button class="w-opt" onclick="selOpt(this,'subj')">English</button>
+              </div>
+
+              <div class="w-q">Performance Level</div>
+              <div class="w-opts" data-key="perf">
+                <button class="w-opt" onclick="selOpt(this,'perf')">Below Average</button>
+                <button class="w-opt" onclick="selOpt(this,'perf')">Average</button>
+                <button class="w-opt" onclick="selOpt(this,'perf')">Good but inconsistent</button>
+                <button class="w-opt" onclick="selOpt(this,'perf')">High performer</button>
+              </div>
+
+              <button class="btn-gold w-next" onclick="nextStepCheck(3, ['grade','subj','perf'])">Continue <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+
+            <!-- Step 3 : Behavior -->
+            <div class="w-step" id="step-3">
+              <div class="w-q">Biggest Challenge</div>
+              <div class="w-opts col-opts" data-key="challenge">
+                <button class="w-opt" onclick="selOpt(this,'challenge')">Lack of focus</button>
+                <button class="w-opt" onclick="selOpt(this,'challenge')">Low confidence</button>
+                <button class="w-opt" onclick="selOpt(this,'challenge')">Difficulty understanding concepts</button>
+                <button class="w-opt" onclick="selOpt(this,'challenge')">Exam stress</button>
+              </div>
+
+              <div class="w-q" style="margin-top:10px">Learning Style</div>
+              <div class="w-opts col-opts" data-key="style">
+                <button class="w-opt" onclick="selOpt(this,'style')">Visual learner (needs diagrams/images)</button>
+                <button class="w-opt" onclick="selOpt(this,'style')">Practice-based (learns by doing)</button>
+                <button class="w-opt" onclick="selOpt(this,'style')">Step-by-step learner (structured guidance)</button>
+                <button class="w-opt" onclick="selOpt(this,'style')">Learns fast but forgets quickly</button>
+              </div>
+
+              <button class="btn-gold w-next" onclick="nextStepCheck(4, ['challenge','style'])">Continue <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+
+            <!-- Step 4 : Skill Check -->
+            <div class="w-step" id="step-4">
+              <div class="w-q" style="margin-bottom:8px">Math Check</div>
+              <p style="font-size:13.5px;color:var(--fg2);margin-bottom:16px;font-weight:200;">What comes next in the sequence? 3, 6, 12, 24, ?</p>
+              <div class="w-opts" style="margin-bottom:20px" data-key="q1">
+                <button class="w-opt" onclick="selOpt(this,'q1')">36</button>
+                <button class="w-opt" onclick="selOpt(this,'q1')">48</button>
+                <button class="w-opt" onclick="selOpt(this,'q1')">72</button>
+              </div>
+
+              <div class="w-q" style="margin-bottom:8px">English Check</div>
+              <p style="font-size:13.5px;color:var(--fg2);margin-bottom:16px;font-weight:200;">Which sentence is grammatically correct?</p>
+              <div class="w-opts col-opts" data-key="q2">
+                <button class="w-opt" onclick="selOpt(this,'q2')">She don't like apples.</button>
+                <button class="w-opt" onclick="selOpt(this,'q2')">She doesn't likes apples.</button>
+                <button class="w-opt" onclick="selOpt(this,'q2')">She doesn't like apples.</button>
+              </div>
+
+              <button class="btn-gold w-next" onclick="nextStepCheck(5, ['q1','q2'])">Continue <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+
+            <!-- Step 5 : Goals -->
+            <div class="w-step" id="step-5">
+              <div class="w-q">Primary Academic Goal</div>
+              <div class="w-opts col-opts" data-key="goal">
+                <button class="w-opt" onclick="selOpt(this,'goal')">Improve grades</button>
+                <button class="w-opt" onclick="selOpt(this,'goal')">Build confidence</button>
+                <button class="w-opt" onclick="selOpt(this,'goal')">Prepare for exams</button>
+                <button class="w-opt" onclick="selOpt(this,'goal')">Long-term academic excellence</button>
+              </div>
+              <button class="btn-gold w-next" onclick="nextStepCheck(6, ['goal']); generateReport();">Analyze Results & Generate Report <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+
+            <!-- Step 6 : Loading & Results -->
+            <div class="w-step" id="step-6">
+              <div class="w-loader" id="w-loader">
+                <div class="spinner"></div>
+                <p style="font-size:14px;color:var(--gold);margin-top:24px;font-weight:300;letter-spacing:.05em">Generating custom report and insights...</p>
+              </div>
+              <div class="w-result" id="w-result" style="display:none;">
+                <div class="w-res-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="w-res-txt" id="gen-insight">Your child has an intuitive understanding but lacks confidence in independent application. A structured, step-by-step approach will vastly improve clarity and lasting confidence.</div>
+                
+                <div class="w-res-rec" style="padding:18px">
+                   <div class="rec-lbl">Core Strength</div>
+                   <div class="rec-val" id="gen-strength" style="font-size:15px;margin-bottom:12px;color:var(--fg2)">Good baseline potential</div>
+                   <div class="rec-lbl">Area to Improve</div>
+                   <div class="rec-val" id="gen-improve" style="font-size:15px;margin-bottom:12px;color:var(--fg2)">Independent application</div>
+                   <div class="rec-lbl">Recommended Format</div>
+                   <div class="rec-val" style="font-size:15px;color:var(--gold)">Personalized 1-on-1 Mentoring</div>
+                </div>
+                
+                <p style="font-size:13.5px;color:var(--fg3);line-height:1.6;margin-bottom:24px;text-align:center;">Your full PDF report has been generated! Check your downloads or speak directly to one of our Academic Advisors to build a roadmap.</p>
+                
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <button class="btn-gold w-next" style="margin:0" onclick="downloadPDF()">Download Report (PDF)</button>
+                  <a href="#" id="wa-link" target="_blank" rel="noopener" class="btn-wire" style="justify-content:center;font-size:13px;width:100%">Speak With an Academic Advisor</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo"><img src="data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//9k=" alt="AatiCademy"/><span class="ft-logo-name">AatiCademy</span></div>
+        <p class="ft-tag">Where Faith Meets Academic Excellence — premium online education for young girls worldwide.</p>
+        <div class="ft-soc">
+          <a href="https://www.facebook.com/profile.php?id=61564298513815" target="_blank" rel="noopener" class="soc">f</a>
+          <a href="https://wa.me/16479782994" target="_blank" rel="noopener" class="soc">W</a>
+          <a href="mailto:info@aaticademy.com" class="soc">@</a>
+        </div>
+      </div>
+      <div class="ft-col"><div class="ft-col-t">Platform</div><ul><li><a href="#" onclick="goHome()">Home</a></li><li><a href="#" onclick="goHome();sto('about-sec')">About</a></li><li><a href="#" onclick="goHome();sto('progs-sec')">Programs</a></li><li><a href="#" onclick="goHome();sto('curric-sec')">Curricula</a></li><li><a href="#" onclick="goFaq()">Parent FAQ</a></li></ul></div>
+      <div class="ft-col"><div class="ft-col-t">Subjects</div><ul><li><a href="#">Mathematics</a></li><li><a href="#">Physics &amp; Chemistry</a></li><li><a href="#">English</a></li><li><a href="#">Coding &amp; STEM</a></li><li><a href="#">Exam Prep</a></li></ul></div>
+      <div class="ft-col"><div class="ft-col-t">Contact</div><ul><li><a href="mailto:info@aaticademy.com">info@aaticademy.com</a></li><li><a href="tel:+919903567327">+91 99035 67327</a></li><li><a href="https://wa.me/16479782994">WhatsApp</a></li><li><a href="#" onclick="goHome();sto('contact-sec')">Book Demo →</a></li></ul></div>
+    </div>
+    <div class="ft-bot"><p class="ft-copy">© 2025 AatiCademy. All rights reserved.</p><div class="ft-lnks"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+</div><!-- /main-page -->
+
+<!-- ═══ FAQ PAGE ═══ -->
+<div id="faq-page" class="page">
+<section class="faq-hero">
+  <div class="faq-hero-bg"></div>
+  <div class="wrap faq-hero-inner">
+    <div class="eyebrow reveal" style="justify-content:center">Parent Resources</div>
+    <h1 class="faq-h reveal d1"><em>Every question</em><br>parents ask us</h1>
+    <p class="faq-p reveal d2">The most common questions parents ask when choosing an online tutor for their daughter — answered honestly.</p>
+    <div class="faq-search-wrap reveal d3">
+      <input class="faq-search" type="text" placeholder="Search questions..." oninput="filterFaq(this.value)"/>
+      <div class="faq-search-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg></div>
+    </div>
+  </div>
+</section>
+<div class="faq-cats">
+  <button class="fcat act" onclick="filterCat('all',this)">All</button>
+  <button class="fcat" onclick="filterCat('start',this)">Getting Started</button>
+  <button class="fcat" onclick="filterCat('safety',this)">Safety &amp; Values</button>
+  <button class="fcat" onclick="filterCat('learning',this)">Learning &amp; Progress</button>
+  <button class="fcat" onclick="filterCat('schedule',this)">Scheduling &amp; Cost</button>
+  <button class="fcat" onclick="filterCat('tutors',this)">About Tutors</button>
+  <button class="fcat" onclick="filterCat('exams',this)">Exams &amp; Results</button>
+</div>
+<div class="faq-body">
+  <div class="faq-group" data-cat="start"><div class="faq-gtitle"><span class="fgn">01</span>Getting Started</div><div class="faq-list">
+    <div class="faq-item" data-cat="start"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What is AatiCademy and who is it for?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>AatiCademy is a premium online tutoring platform exclusively for young girls in grades 1–12. We provide <strong>one-on-one live sessions</strong> with expert female educators in a safe, Islamic-values-based environment. We serve families in the USA, Canada, UK, UAE, India and beyond.</p></div></div></div>
+    <div class="faq-item" data-cat="start"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How does the free demo class work?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>The free demo is a <strong>full 45–60 minute session</strong> — not a sales call. We match your daughter with a tutor based on her grade and subject. The tutor assesses her level and gives a clear picture of how sessions would proceed. <strong>No obligation to continue</strong>.</p></div></div></div>
+    <div class="faq-item" data-cat="start"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What grades and ages do you teach?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>We teach students from <strong>Grade 1 through Grade 12</strong> (ages approx 6–18), across all major curricula including IGCSE, IB, CBSE, and ICSE.</p></div></div></div>
+  </div></div>
+  <div class="faq-group" data-cat="safety"><div class="faq-gtitle"><span class="fgn">02</span>Safety &amp; Islamic Values</div><div class="faq-list">
+    <div class="faq-item" data-cat="safety"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Are all your tutors female?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p><strong>Yes — 100% of our tutors are female.</strong> This is a founding principle, not an afterthought.</p></div></div></div>
+    <div class="faq-item" data-cat="safety"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How is the environment kept safe and Islamic?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>All tutors are Muslim women who understand Islamic adab. Sessions are conducted with hijab, appropriate language, and professional boundaries. <strong>No male access</strong> to any sessions or communications. Parents may observe at any time.</p></div></div></div>
+    <div class="faq-item" data-cat="safety"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Can I sit in on my daughter's sessions?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p><strong>Absolutely — and we encourage it,</strong> especially for younger students.</p></div></div></div>
+  </div></div>
+  <div class="faq-group" data-cat="learning"><div class="faq-gtitle"><span class="fgn">03</span>Learning &amp; Progress</div><div class="faq-list">
+    <div class="faq-item" data-cat="learning"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How do you personalize learning?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>Every student begins with an <strong>initial assessment</strong> identifying her level, learning style, strengths, and gaps. A personalized plan is created and continuously adjusted.</p></div></div></div>
+    <div class="faq-item" data-cat="learning"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What if my daughter doesn't connect with her tutor?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p><strong>We will reassign — no questions asked, no penalty.</strong> The right fit matters more than anything.</p></div></div></div>
+  </div></div>
+  <div class="faq-group" data-cat="schedule"><div class="faq-gtitle"><span class="fgn">04</span>Scheduling &amp; Cost</div><div class="faq-list">
+    <div class="faq-item" data-cat="schedule"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How flexible is the scheduling?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p><strong>Highly flexible.</strong> Mornings, afternoons, evenings, or weekends — any timezone. You and your tutor agree on a recurring schedule.</p></div></div></div>
+    <div class="faq-item" data-cat="schedule"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How much does tutoring cost?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p>Pricing is personalised based on grade, subject, and frequency — <strong>transparent, no hidden fees.</strong> Contact us for an accurate quote.</p></div></div></div>
+  </div></div>
+  <div class="faq-group" data-cat="exams"><div class="faq-gtitle"><span class="fgn">05</span>Exams &amp; Results</div><div class="faq-list">
+    <div class="faq-item" data-cat="exams"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Which exam boards do you prepare for?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><ul><li><strong>IGCSE &amp; O-Level</strong> (Cambridge)</li><li><strong>AS &amp; A Levels</strong></li><li><strong>IB Diploma Programme</strong> — HL and SL</li><li><strong>CBSE &amp; ICSE</strong> — Indian boards</li><li><strong>SAT, ACT, AP Exams</strong></li><li><strong>IELTS &amp; TOEFL</strong></li></ul></div></div></div>
+    <div class="faq-item" data-cat="exams"><button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">My daughter's exam is in 4 weeks — is it too late?</span><div class="faq-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div></button><div class="faq-a"><div class="faq-a-inner"><p><strong>Never too late.</strong> Four weeks of intensive revision with an expert tutor can make a substantial difference.</p></div></div></div>
+  </div></div>
+  <div class="faq-cta-box">
+    <h2 class="faq-cta-h">Still have questions?<br>Let's <em>talk directly</em></h2>
+    <p class="faq-cta-p">Send us a message on WhatsApp or book a free call — we love answering questions personally.</p>
+    <div class="faq-cta-acts">
+      <a href="#" onclick="goHome();setTimeout(()=>sto('contact-sec'),300)" class="btn-gold">Get Your Child's Report <span class="arr">→</span></a>
+      <a href="https://wa.me/16479782994" target="_blank" rel="noopener" class="btn-wire">Chat on WhatsApp <span class="arr">→</span></a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="ft-bot"><p class="ft-copy">© 2025 AatiCademy. All rights reserved.</p><div class="ft-lnks"><a href="#" onclick="goHome()">Home</a><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+</div><!-- /faq-page -->
+
+<!-- WhatsApp -->
+<a href="https://wa.me/16479782994?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20demo." target="_blank" rel="noopener" class="wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+// ─── CURSOR ───
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring'),trail=document.getElementById('cur-trail');
+let mx=0,my=0,rx=0,ry=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function tick(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';
+  tx+=(mx-tx)*.06;ty+=(my-ty)*.06;trail.style.left=tx+'px';trail.style.top=ty+'px';
+  requestAnimationFrame(tick);
+})();
+const interactEls='a,button,.feat,.tcard,.faq-item,.ptab,.fcat,.board,.pp-topic,.s-card,.curric-card,.pop-item,.cp-tag,.curric-promise';
+document.querySelectorAll(interactEls).forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    dot.style.width='15px';dot.style.height='15px';dot.style.boxShadow='0 0 20px rgba(201,150,60,0.8),0 0 40px rgba(201,150,60,0.3)';
+    ring.style.width='58px';ring.style.height='58px';ring.style.borderColor='rgba(201,150,60,0.75)';ring.style.background='rgba(201,150,60,0.04)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    dot.style.width='10px';dot.style.height='10px';dot.style.boxShadow='0 0 12px rgba(201,150,60,0.35)';
+    ring.style.width='38px';ring.style.height='38px';ring.style.borderColor='rgba(201,150,60,0.5)';ring.style.background='transparent';
+  });
+});
+
+// ─── THEME ───
+function toggleTheme(){
+  const isLight=document.documentElement.getAttribute('data-theme')==='light';
+  document.documentElement.setAttribute('data-theme',isLight?'dark':'light');
+  document.getElementById('themeBtn').textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('ac-theme',isLight?'dark':'light');
+}
+(function(){
+  const t=localStorage.getItem('ac-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeBtn').textContent=t==='light'?'🌙':'☀️';
+})();
+
+// ─── HERO CANVAS ───
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,mouse={x:-1000,y:-1000,tx:-1000,ty:-1000};
+  const pts=[];
+  function resize(){
+    W=canvas.width=canvas.offsetWidth;
+    H=canvas.height=canvas.offsetHeight;
+    pts.length=0;
+    const sp=45;
+    for(let x=-50;x<W+50;x+=sp){
+      for(let y=-50;y<H+50;y+=sp){
+        pts.push({bx:x+(Math.random()-.5)*20,by:y+(Math.random()-.5)*20,x:x,y:y,a:0,l:10+Math.random()*6,al:.08+Math.random()*.15});
+      }
+    }
+  }
+  resize();window.addEventListener('resize',resize);
+  const hero=document.getElementById('hero');
+  hero.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mouse.tx=e.clientX-r.left;mouse.ty=e.clientY-r.top;});
+  hero.addEventListener('mouseleave',()=>{mouse.tx=-1000;mouse.ty=-1000;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    mouse.x+=(mouse.tx-mouse.x)*.1;mouse.y+=(mouse.ty-mouse.y)*.1;
+    if(mouse.x>0&&mouse.y>0){
+      const g=ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,200);
+      g.addColorStop(0,'rgba(201,150,60,0.12)');g.addColorStop(1,'rgba(201,150,60,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(mouse.x,mouse.y,200,0,Math.PI*2);ctx.fill();
+    }
+    pts.forEach(p=>{
+      const dx=mouse.x-p.bx,dy=mouse.y-p.by,dist=Math.sqrt(dx*dx+dy*dy);
+      const f=Math.max(0,350-dist)/350;
+      let ta=f>0?Math.atan2(dy,dx):Math.PI/4;
+      let da=ta-p.a;
+      if(da>Math.PI)da-=Math.PI*2;if(da<-Math.PI)da+=Math.PI*2;
+      p.a+=da*.12;
+      const px=Math.cos(ta)*f*24,py=Math.sin(ta)*f*24;
+      p.x+=(p.bx+px-p.x)*.12;p.y+=(p.by+py-p.y)*.12;
+      ctx.beginPath();
+      const lx=Math.cos(p.a)*(p.l/2),ly=Math.sin(p.a)*(p.l/2);
+      ctx.moveTo(p.x-lx,p.y-ly);ctx.lineTo(p.x+lx,p.y+ly);
+      ctx.strokeStyle=`rgba(201,150,60,${p.al+f*.3})`;ctx.lineWidth=1.5;ctx.lineCap='round';ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── NAV ───
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
+function toggleM(){document.getElementById('mmenu').classList.toggle('open')}
+function closeM(){document.getElementById('mmenu').classList.remove('open')}
+
+// ─── PAGES ───
+function goHome(){document.getElementById('main-page').classList.add('active');document.getElementById('faq-page').classList.remove('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goFaq(){document.getElementById('faq-page').classList.add('active');document.getElementById('main-page').classList.remove('active');window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>document.querySelectorAll('#faq-page .reveal').forEach(el=>obs.observe(el)),100)}
+function sto(id){const el=document.getElementById(id);if(el)setTimeout(()=>window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'}),60)}
+document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+
+// ─── PROGRAMS ───
+function showP(i){document.querySelectorAll('.ptab').forEach((b,j)=>b.classList.toggle('act',j===i));document.querySelectorAll('.pp').forEach((p,j)=>p.classList.toggle('act',j===i))}
+
+// ─── REVEAL ───
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);if(e.target.classList.contains('s-card-num')){const n=e.target.querySelector('.num-acc');if(n){let end=parseInt(n.getAttribute('data-val')),dur=1300,st=performance.now();function upd(t){let p=Math.min((t-st)/dur,1);n.textContent=Math.floor((p===1?1:1-Math.pow(2,-10*p))*end);if(p<1)requestAnimationFrame(upd);}requestAnimationFrame(upd);}}}})},{threshold:.07,rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('.reveal, .reveal-fade').forEach(el=>obs.observe(el));
+
+// ─── FAQ ───
+function toggleFaq(btn){const item=btn.closest('.faq-item');const was=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open')}
+function filterCat(cat,btn){if(!document.getElementById('faq-page').classList.contains('active'))goFaq();if(btn){document.querySelectorAll('.fcat').forEach(b=>b.classList.remove('act'));btn.classList.add('act')}document.querySelectorAll('.faq-group,.faq-item').forEach(el=>{el.style.display=(cat==='all'||el.dataset.cat===cat)?'':'none'})}
+function filterFaq(q){const s=q.toLowerCase().trim();document.querySelectorAll('.faq-item').forEach(item=>{const t=item.querySelector('.faq-q-text').textContent.toLowerCase();const a=item.querySelector('.faq-a-inner')?.textContent.toLowerCase()||'';item.style.display=(!s||t.includes(s)||a.includes(s))?'':'none'})}
+
+// ─── FORM ───
+function subForm(e){e.preventDefault();document.getElementById('cform').style.display='none';document.getElementById('fok').classList.add('show')}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+let wData = {};
+
+function checkS1() {
+  const n = document.getElementById('p-name').value.trim();
+  const p = document.getElementById('p-phone').value.trim();
+  const btn = document.getElementById('btn-s1');
+  if(n.length > 2 && p.length > 6) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+  }
+}
+
+function selOpt(btn, key) {
+  const opts = btn.parentElement.querySelectorAll('.w-opt');
+  opts.forEach(o => o.classList.remove('sel'));
+  btn.classList.add('sel');
+  wData[key] = btn.innerText;
+}
+
+function nextStepCheck(n, keys) {
+  for(let k of keys) {
+    if(!wData[k]) {
+      alert('Please select an option for each question before continuing.');
+      return;
+    }
+  }
+  nextStep(n);
+}
+
+function nextStep(n) {
+  document.querySelectorAll('.w-step').forEach(s => s.classList.remove('act'));
+  const stepEl = document.getElementById('step-' + n);
+  if(stepEl) stepEl.classList.add('act');
+  
+  const w = [16.6, 33.3, 50, 66.6, 83.3, 100];
+  document.getElementById('w-bar').style.width = w[n-1] + "%";
+  document.getElementById('w-step-lbl').innerText = "Step " + n + " of 6";
+  
+  const titles = [
+    "Let’s understand your child better",
+    "Academic Context",
+    "Behavior & Challenges",
+    "Let's try a quick challenge",
+    "Academic Goals",
+    "Analysis Complete"
+  ];
+  document.getElementById('w-title').innerText = titles[n-1];
+}
+
+function generateReport() {
+  document.getElementById('w-loader').style.display = 'flex';
+  document.getElementById('w-result').style.display = 'none';
+  
+  let insight = "Your child exhibits a strong baseline in " + wData.subj + " but struggles with " + wData.challenge.toLowerCase() + ". ";
+  if (wData.style.includes("Visual")) {
+    insight += "Since they are a visual learner, integrating diagrams and clear illustrations into lessons will dramatically improve material retention.";
+  } else if (wData.style.includes("Practice")) {
+    insight += "Since they learn by doing, an active, practice-based environment is absolutely crucial for their success.";
+  } else if (wData.style.includes("Step-by-step")) {
+    insight += "A structured, slow-paced breakdown of complex concepts will help them build lasting confidence without feeling overwhelmed.";
+  } else {
+    insight += "Consistent repetition and targeted, spaced revision will help them retain what they learn quickly and pass exams effectively.";
+  }
+  
+  let strength = "Quick grasp of core concepts";
+  if(wData.perf.includes("High")) strength = "Excellent academic baseline";
+  
+  let improve = wData.challenge;
+  
+  document.getElementById('gen-insight').innerText = insight;
+  document.getElementById('gen-strength').innerText = strength;
+  document.getElementById('gen-improve').innerText = improve;
+  
+  wData.insight = insight;
+  wData.strength = strength;
+  wData.improve = improve;
+  wData.name = document.getElementById('p-name').value.trim();
+  wData.phone = document.getElementById('p-phone').value.trim();
+  
+  // WhatsApp dispatch message format
+  let msg = `Hi AatiCademy team! I just completed the personalized academic report for my child.\n\n`;
+  msg += `*Name:* ${wData.name}\n`;
+  msg += `*Number:* ${wData.phone}\n`;
+  msg += `*Grade:* ${wData.grade}\n`;
+  msg += `*Subject Focus:* ${wData.subj}\n`;
+  msg += `*Performance Level:* ${wData.perf}\n`;
+  msg += `*Primary Challenge:* ${wData.challenge}\n`;
+  msg += `*Learning Style:* ${wData.style}\n`;
+  msg += `*Goal:* ${wData.goal}\n\n`;
+  msg += `*Generated Insight:*\n${wData.insight}\n\n`;
+  msg += `I'd like to speak with an academic advisor.`;
+  
+  document.getElementById('wa-link').href = `https://wa.me/16479782994?text=${encodeURIComponent(msg)}`;
+  
+  setTimeout(() => {
+    document.getElementById('w-loader').style.display = 'none';
+    document.getElementById('w-result').style.display = 'block';
+  }, 2500);
+}
+
+function downloadPDF() {
+  if (!window.jspdf) {
+    alert('PDF generator is loading, please try again in a moment.');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  // Page 1
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(32);
+  doc.setTextColor(201, 150, 60);
+  doc.text("AATI ACADEMY", 105, 80, null, null, "center");
+  
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(20);
+  doc.setTextColor(40, 40, 40);
+  doc.text("Personalized Academic Report", 105, 100, null, null, "center");
+  
+  doc.setFontSize(14);
+  doc.setTextColor(80, 80, 80);
+  doc.text(`Student: ${wData.name}`, 105, 130, null, null, "center");
+  doc.text(`Grade Level: ${wData.grade}`, 105, 140, null, null, "center");
+  const d = new Date();
+  doc.text(`Report Date: ${d.toLocaleDateString()}`, 105, 150, null, null, "center");
+  
+  // Page 2
+  doc.addPage();
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(201, 150, 60);
+  doc.text("Academic Overview", 20, 30);
+  
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(14);
+  doc.setTextColor(20, 20, 20);
+  doc.text(`Main Subject Focus:`, 20, 50);
+  doc.text(`Current Performance Level:`, 20, 65);
+  doc.text(`Primary Academic Goal:`, 20, 80);
+  doc.setFont("helvetica", "bold");
+  doc.text(String(wData.subj), 80, 50);
+  doc.text(String(wData.perf), 90, 65);
+  doc.text(String(wData.goal), 85, 80);
+  
+  // Page 3
+  doc.addPage();
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(201, 150, 60);
+  doc.text("Analysis & Insights", 20, 30);
+  
+  doc.setFontSize(14);
+  doc.setTextColor(20, 20, 20);
+  doc.text("Core Strength:", 20, 50);
+  doc.setFont("helvetica", "normal");
+  doc.text(String(wData.strength), 60, 50);
+  
+  doc.setFont("helvetica", "bold");
+  doc.text("Primary Challenge:", 20, 70);
+  doc.setFont("helvetica", "normal");
+  doc.text(String(wData.improve), 70, 70);
+  
+  doc.setFont("helvetica", "bold");
+  doc.text("Identified Learning Pattern:", 20, 90);
+  doc.setFont("helvetica", "normal");
+  doc.text(String(wData.style), 85, 90);
+  
+  // Page 4
+  doc.addPage();
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(201, 150, 60);
+  doc.text("Recommended Action Plan", 20, 30);
+  
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(14);
+  doc.setTextColor(40, 40, 40);
+  let splitText = doc.splitTextToSize(wData.insight, 170);
+  doc.text(splitText, 20, 50);
+  
+  doc.setFont("helvetica", "bold");
+  doc.text("Recommended Format:", 20, 100);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(201, 150, 60);
+  doc.text("Personalized 1-on-1 Mentoring", 75, 100);
+  
+  // Page 5
+  doc.addPage();
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(24);
+  doc.setTextColor(201, 150, 60);
+  doc.text("Next Steps", 105, 80, null, null, "center");
+  
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(16);
+  doc.setTextColor(40, 40, 40);
+  doc.text("Speak With an Academic Advisor", 105, 110, null, null, "center");
+  doc.setFontSize(14);
+  doc.text("WhatsApp: +1 647 978 2994", 105, 130, null, null, "center");
+  
+  doc.save(`${wData.name.replace(/[^a-zA-Z0-9]/g, '_')}_Academic_Report.pdf`);
+}
+</script>
+<script>
+/* ─── CTA canvas particle animation ─── */
+(function(){
+  const canvas = document.getElementById('cta-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const GOLD   = [201,150,60];
+  const COUNT  = 55;
+  let W, H, particles = [];
+
+  function resize(){
+    const sec = canvas.parentElement;
+    W = canvas.width  = sec.offsetWidth;
+    H = canvas.height = sec.offsetHeight;
+  }
+
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function makeParticle(){
+    return {
+      x  : rand(0, W),
+      y  : rand(0, H),
+      r  : rand(1, 3.5),
+      vx : rand(-0.18, 0.18),
+      vy : rand(-0.12, 0.12),
+      a  : rand(0.05, 0.45),
+      pa : rand(0, Math.PI*2),
+      ps : rand(0.005, 0.015)
+    };
+  }
+
+  function init(){
+    resize();
+    particles = Array.from({length:COUNT}, makeParticle);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    // draw connecting lines between nearby particles
+    for(let i=0;i<particles.length;i++){
+      const p = particles[i];
+      for(let j=i+1;j<particles.length;j++){
+        const q = particles[j];
+        const dx = p.x-q.x, dy = p.y-q.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist < 120){
+          const alpha = (1 - dist/120) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(${GOLD.join(',')},${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw particles
+    for(const p of particles){
+      p.pa += p.ps;
+      const pulse = p.a + Math.sin(p.pa) * 0.12;
+
+      // outer glow
+      const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);
+      grad.addColorStop(0, `rgba(${GOLD.join(',')},${pulse * 0.6})`);
+      grad.addColorStop(1, `rgba(${GOLD.join(',')},0)`);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r*5, 0, Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // core dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${GOLD.join(',')},${pulse})`;
+      ctx.fill();
+
+      // move
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < -10) p.x = W+10;
+      if(p.x > W+10) p.x = -10;
+      if(p.y < -10) p.y = H+10;
+      if(p.y > H+10) p.y = -10;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  init();
+  draw();
+  window.addEventListener('resize', ()=>{ resize(); });
+})();
+</script>
+</body>
+</html>
