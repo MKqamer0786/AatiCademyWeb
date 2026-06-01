@@ -372,7 +372,7 @@
       inset: 0;
       z-index: 2;
       opacity: .022;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves=[...]
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' result='noise'/%3E%3C/filter%3E%3Crect width='512' height='512' fill='%23000' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 256px;
       pointer-events: none
     }
@@ -1000,36 +1000,486 @@
     .ab-txt {
       font-size: 13px;
       font-weight: 300;
-      line-height: 1.6;
       color: var(--fg2)
     }
 
-    /* ── INSTAGRAM REEL ── */
-    .instagram-reel {
-      max-width: 500px;
-      margin: 60px auto;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(201, 150, 60, 0.1);
-      border: 1px solid var(--rule2);
-      transition: all .3s ease;
+    /* ── FEATURES ── */
+    .features-sec {
+      padding: 80px 0
     }
 
-    .instagram-reel:hover {
-      box-shadow: 0 12px 48px rgba(201, 150, 60, 0.2);
-      transform: translateY(-2px)
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 50px
     }
 
-    .instagram-reel iframe {
+    .feat-card {
+      padding: 40px;
+      background: var(--feat-bg);
+      border-radius: 8px;
+      text-align: center;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .feat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--about-gold), transparent)
+    }
+
+    .feat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .15)
+    }
+
+    [data-theme="light"] .feat-card:hover {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .08)
+    }
+
+    .feat-icon {
+      font-size: 40px;
+      margin-bottom: 20px
+    }
+
+    .feat-title {
+      font-family: 'Cormorant', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--feat-fg);
+      margin-bottom: 14px
+    }
+
+    .feat-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--feat-fg2)
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-sec {
+      padding: 80px 0;
+      background: var(--bg2)
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px
+    }
+
+    .testi-card {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 32px;
+      transition: all .3s
+    }
+
+    .testi-card:hover {
+      border-color: var(--rule2);
+      background: rgba(255, 255, 255, .1)
+    }
+
+    .testi-star {
+      color: var(--gold2);
+      margin-bottom: 14px;
+      font-size: 16px
+    }
+
+    .testi-text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--fg2);
+      margin-bottom: 18px;
+      min-height: 60px
+    }
+
+    .testi-author {
+      font-weight: 400;
+      color: var(--fg);
+      font-size: 13px;
+      margin-bottom: 3px
+    }
+
+    .testi-role {
+      font-size: 11px;
+      color: var(--fg3);
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-sec {
+      padding: 80px 0;
+      text-align: center
+    }
+
+    .cta-h {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: -.01em
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--fg2);
+      max-width: 600px;
+      margin: 0 auto 44px;
+      line-height: 1.8
+    }
+
+    /* ── FORM ── */
+    .form-sec {
+      padding: 80px 0
+    }
+
+    .form-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--form-bg);
+      border: 1px solid var(--form-border);
+      border-radius: 8px;
+      padding: 48px 40px;
+      transition: all .3s
+    }
+
+    .form-wrap:focus-within {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .form-group {
+      margin-bottom: 20px
+    }
+
+    .form-label {
       display: block;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--form-fg);
+      margin-bottom: 8px
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--form-border);
       border-radius: 4px;
+      padding: 12px 14px;
+      font-family: 'Lexend', sans-serif;
+      font-size: 13px;
+      color: var(--form-fg);
+      transition: all .2s;
+      resize: vertical
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(245, 240, 232, 0.3)
+    }
+
+    [data-theme="light"] .form-input::placeholder,
+    [data-theme="light"] .form-textarea::placeholder {
+      color: rgba(26, 18, 8, 0.2)
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--gold2);
+      background: rgba(201, 150, 60, .04)
+    }
+
+    .form-textarea {
+      min-height: 120px
+    }
+
+    .form-btn {
+      width: 100%;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: #080808;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Lexend', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: all .3s
+    }
+
+    .form-btn:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 44px var(--gold-glow)
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--footer-bg);
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--rule);
+      transition: background .4s
+    }
+
+    .footer-wrap {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 60px
+    }
+
+    .footer-col-title {
+      font-family: 'Cormorant', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--fg);
+      margin-bottom: 18px;
+      letter-spacing: .01em
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--fg2);
+      text-decoration: none;
+      transition: color .2s;
+      cursor: none
+    }
+
+    .footer-links a:hover {
+      color: var(--gold2)
+    }
+
+    .footer-about {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--fg2);
+      margin-bottom: 20px
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px
+    }
+
+    .footer-social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--rule2);
+      border-radius: 3px;
+      color: var(--gold2);
+      text-decoration: none;
+      transition: all .3s;
+      cursor: none
+    }
+
+    .footer-social-icon:hover {
+      background: rgba(201, 150, 60, .1);
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--fg3)
+    }
+
+    .footer-copy {
+      flex: 1
+    }
+
+    .footer-links-bottom {
+      display: flex;
+      gap: 30px
+    }
+
+    .footer-links-bottom a {
+      font-size: 12px;
+      color: var(--fg3);
+      text-decoration: none;
+      transition: color .2s;
+      cursor: none
+    }
+
+    .footer-links-bottom a:hover {
+      color: var(--gold2)
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .wrap {
+        padding: 0 32px
+      }
+
+      #nav {
+        padding: 0 32px
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px
+      }
+
+      .feat-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .footer-wrap {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 0 20px
+      }
+
+      #nav {
+        padding: 0 20px;
+        height: 56px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .ham {
+        display: flex
+      }
+
+      .theme-btn {
+        margin-left: 4px
+      }
+
+      #mmenu {
+        top: 56px
+      }
+
+      .cl {
+        opacity: 0 !important;
+        pointer-events: none
+      }
+
+      .hero-h {
+        font-size: 42px
+      }
+
+      .hdg {
+        font-size: clamp(32px, 7vw, 42px)
+      }
+
+      .sec {
+        padding: 50px 0
+      }
+
+      .stats-hdr {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 50px
+      }
+
+      .boards {
+        grid-template-columns: 1fr
+      }
+
+      .about-quote {
+        font-size: clamp(18px, 5vw, 24px)
+      }
+
+      .feat-grid {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+
+      .feat-card {
+        padding: 24px
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px
+      }
+
+      .footer-wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 40px
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center
+      }
+
+      .footer-links-bottom {
+        flex-direction: column;
+        gap: 12px
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr
+      }
+
+      .form-wrap {
+        padding: 32px 20px
+      }
+
+      .cta-h {
+        font-size: clamp(32px, 8vw, 48px)
+      }
     }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(20px)
+        transform: translateY(24px)
       }
 
       to {
@@ -1048,119 +1498,77 @@
       }
     }
 
-    @keyframes scrollPulse {
-      0% {
-        opacity: 0;
-        transform: translateY(-10px)
-      }
-
-      50% {
-        opacity: 1
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(10px)
-      }
-    }
-
     @keyframes blink {
       0%,
-      49%,
       100% {
         opacity: 1
       }
 
       50% {
-        opacity: .3
+        opacity: .5
       }
     }
 
-    @media (max-width: 1024px) {
-      #nav {
-        padding: 0 32px
+    @keyframes scrollPulse {
+      0%,
+      100% {
+        opacity: 0;
+        transform: translateY(0)
       }
 
-      .wrap {
-        padding: 0 32px
+      50% {
+        opacity: 1
       }
 
-      .about-grid {
-        gap: 50px
-      }
-
-      .boards {
-        grid-template-columns: 1fr
-      }
-    }
-
-    @media (max-width: 768px) {
-      #nav {
-        padding: 0 20px
-      }
-
-      .wrap {
-        padding: 0 20px
-      }
-
-      .nav-links {
-        display: none
-      }
-
-      .theme-btn,
-      .ham {
-        display: flex
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px
-      }
-
-      .stats-row {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .instagram-reel {
-        max-width: 100%;
-        margin: 40px auto
+      100% {
+        opacity: 0;
+        transform: translateY(16px)
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Navigation & Header -->
+  <!-- Navigation -->
   <nav id="nav">
-    <a href="/" class="nav-logo">
-      <img class="dark-logo" src="" alt="AatiCademy Logo" />
-      <img class="light-logo" src="" alt="AatiCademy Logo Light" />
+    <a href="#" class="nav-logo">
+      <img src="./assets/dark-logo.svg" alt="AatiCademy" class="dark-logo" />
+      <img src="./assets/light-logo.svg" alt="AatiCademy" class="light-logo" />
       <span class="nav-logo-name">AatiCademy</span>
     </a>
+
     <ul class="nav-links">
-      <li><a href="#home">HOME</a></li>
-      <li><a href="#about">ABOUT</a></li>
-      <li><a href="#features">FEATURES</a></li>
-      <li><a href="#contact" class="nav-cta">GET STARTED</a></li>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
     </ul>
-    <button class="theme-btn">☀</button>
-    <button class="ham">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+
+    <div style="display: flex; align-items: center;">
+      <button class="theme-btn" id="themeBtn">🌙</button>
+      <button class="ham" id="hamBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Menu -->
   <div id="mmenu">
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#features">FEATURES</a>
-    <a href="#contact">GET STARTED</a>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#testimonials">Testimonials</a>
   </div>
 
-  <!-- Hero Section -->
-  <section id="hero" class="page active">
+  <!-- Custom Cursor Elements -->
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
+  <div id="cur-trail"></div>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
     <canvas id="hero-canvas"></canvas>
     <div class="noise"></div>
     <div class="vignette"></div>
@@ -1168,99 +1576,519 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        Premium Islamic Education
+        New Era of Education
       </div>
 
       <h1 class="hero-h">
-        AatiCademy <span class="ital">Excellence</span> <span class="dim">Educational Platform</span>
+        <span class="ital">Islamic</span> Education <span class="dim">x</span> Academic Excellence
       </h1>
 
       <div class="hero-divider"></div>
 
       <p class="hero-sub">
-        Where faith meets academic excellence. Join thousands of students mastering Islamic studies with modern pedagogical methods.
+        Empowering students to thrive spiritually and academically through cutting-edge Islamic knowledge and modern education.
       </p>
 
-      <p class="hero-trust">TRUSTED BY 5000+ STUDENTS WORLDWIDE</p>
+      <p class="hero-trust">TRUSTED BY 5000+ STUDENTS</p>
 
       <div class="hero-actions">
-        <button class="btn-gold">Explore Courses <span class="arr">→</span></button>
-        <button class="btn-wire">Learn More <span class="arr">→</span></button>
+        <button class="btn-gold" onclick="scrollToForm()">
+          Enroll Now <span class="arr">→</span>
+        </button>
+        <a href="#about" class="btn-wire">Learn More <span class="arr">→</span></a>
       </div>
 
       <div class="hero-grades">
-        <span class="grade-pill">Grade 1-5</span>
+        <span class="grade-pill">For All Grades</span>
         <span class="grade-sep">•</span>
-        <span class="grade-pill">Grade 6-10</span>
+        <span class="grade-pill">Complete Curriculum</span>
         <span class="grade-sep">•</span>
-        <span class="grade-pill">Advanced</span>
+        <span class="grade-pill">Expert Instructors</span>
       </div>
     </div>
 
-    <!-- Corner Labels -->
-    <div class="cl cl-tl">
-      Students<span class="cl-val">5000+</span>
-    </div>
-    <div class="cl cl-tr">
-      Experience<span class="cl-val">10+ Years</span>
-    </div>
-    <div class="cl cl-bl">
-      Instructors<span class="cl-val">150+</span>
-    </div>
-    <div class="cl cl-br">
-      Courses<span class="cl-val">200+</span>
-    </div>
+    <div class="cl cl-tl">Students <span class="cl-val">5,000+</span></div>
+    <div class="cl cl-tr">Success Rate <span class="cl-val">98%</span></div>
+    <div class="cl cl-bl">Founded <span class="cl-val">2020</span></div>
+    <div class="cl cl-br">Countries <span class="cl-val">15+</span></div>
 
-    <!-- Scroll Hint -->
     <div class="scroll-hint">
       <div class="scroll-line"></div>
-      <span class="scroll-txt">Scroll to explore</span>
+      <div class="scroll-txt">Scroll to explore</div>
     </div>
   </section>
 
-  <!-- Instagram Reel Section -->
-  <section id="reel" class="sec">
-    <div class="wrap">
-      <div style="text-align: center; margin-bottom: 52px;">
-        <div class="eyebrow">Student Testimonials</div>
-        <h2 class="hdg">Watch Our <em>Community</em></h2>
-      </div>
-
-      <!-- Instagram Reel Container -->
-      <div class="instagram-reel">
-        <iframe src="https://www.instagram.com/reel/DXOXaiGq6Em/embed" 
-          width="100%" 
-          height="600" 
-          frameborder="0" 
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-        </iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ticker -->
+  <!-- TICKER -->
   <div class="ticker">
     <div class="ticker-inner">
-      <div class="tick-item">Quranic Excellence <span class="tick-sep"></span></div>
-      <div class="tick-item">Islamic Heritage <span class="tick-sep"></span></div>
-      <div class="tick-item">Modern Pedagogy <span class="tick-sep"></span></div>
-      <div class="tick-item">Expert Instructors <span class="tick-sep"></span></div>
-      <div class="tick-item">Quranic Excellence <span class="tick-sep"></span></div>
-      <div class="tick-item">Islamic Heritage <span class="tick-sep"></span></div>
-      <div class="tick-item">Modern Pedagogy <span class="tick-sep"></span></div>
-      <div class="tick-item">Expert Instructors <span class="tick-sep"></span></div>
+      <div class="tick-item">Excellence in Islamic Education</div>
+      <div class="tick-sep"></div>
+      <div class="tick-item">Quranic Studies • Islamic History • Hadith Sciences</div>
+      <div class="tick-sep"></div>
+      <div class="tick-item">Excellence in Islamic Education</div>
+      <div class="tick-sep"></div>
+      <div class="tick-item">Quranic Studies • Islamic History • Hadith Sciences</div>
     </div>
   </div>
 
-  <!-- Cursor Elements -->
-  <div id="cur-dot"></div>
-  <div id="cur-ring"></div>
+  <!-- STATS SECTION -->
+  <section class="sec stats-sec">
+    <div class="wrap">
+      <div class="stats-hdr">
+        <div>
+          <h2 class="hdg">
+            Proven <em>Impact</em> on Students
+          </h2>
+        </div>
+        <div>
+          <p class="subp">Our holistic approach combines Islamic teachings with modern educational methodologies to foster intellectual growth and spiritual development.</p>
+        </div>
+      </div>
 
-  <!-- Instagram Embed Script -->
-  <script async src="//www.instagram.com/embed.js"></script>
+      <div class="stats-row">
+        <div class="s-card reveal-fade">
+          <div class="s-n">98<span class="s-n sup">%</span></div>
+          <div class="s-l">Student Satisfaction</div>
+        </div>
+        <div class="s-card reveal-fade">
+          <div class="s-n">500<span class="s-n sup">+</span></div>
+          <div class="s-l">Graduates</div>
+        </div>
+        <div class="s-card reveal-fade">
+          <div class="s-n">20<span class="s-n sup">+</span></div>
+          <div class="s-l">Expert Instructors</div>
+        </div>
+        <div class="s-card reveal-fade">
+          <div class="s-n">15<span class="s-n sup">+</span></div>
+          <div class="s-l">Countries Served</div>
+        </div>
+        <div class="s-card reveal-fade">
+          <div class="s-n">4.9<span class="s-n sup">★</span></div>
+          <div class="s-l">Average Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="sec about-sec">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <p class="about-quote">
+            "Our mission is to nurture minds rooted in Islamic values while preparing students for academic excellence and personal growth."
+          </p>
+          <p class="about-p">
+            At AatiCademy, we believe that Islamic education and academic excellence are not mutually exclusive but complementary. Our comprehensive platform integrates Islamic teachings with modern educational frameworks.
+          </p>
+          <p class="about-p">
+            We focus on delivering authentic Islamic knowledge from credible sources while maintaining rigorous academic standards. Our instructors are experts in their respective fields, ensuring quality education.
+          </p>
+          <div class="boards">
+            <div class="board">
+              <div class="board-n">Quranic Studies</div>
+              <div class="board-l">Tajweed, Tafsir, Memorization</div>
+            </div>
+            <div class="board">
+              <div class="board-n">Hadith Sciences</div>
+              <div class="board-l">Authenticity, Classification, Context</div>
+            </div>
+            <div class="board">
+              <div class="board-n">Islamic History</div>
+              <div class="board-l">Civilization, Culture, Heritage</div>
+            </div>
+            <div class="board">
+              <div class="board-n">Fiqh Studies</div>
+              <div class="board-l">Jurisprudence, Applications</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <div class="ab-dark">
+            <h3 class="ab-title">Why Choose <em>AatiCademy</em>?</h3>
+            <p class="ab-p">We provide structured, authenticated Islamic education combined with modern teaching methods.</p>
+            <ul class="ab-list">
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Expert instructors with years of experience</span>
+              </li>
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Comprehensive curriculum aligned with international standards</span>
+              </li>
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Interactive learning with live classes and recordings</span>
+              </li>
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Personalized learning paths for each student</span>
+              </li>
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Regular assessments and progress tracking</span>
+              </li>
+              <li class="ab-item">
+                <div class="ab-dia"></div>
+                <span class="ab-txt">Community support and mentorship programs</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="sec features-sec">
+    <div class="wrap">
+      <h2 class="hdg">Key <em>Features</em></h2>
+
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">📚</div>
+          <h3 class="feat-title">Comprehensive Curriculum</h3>
+          <p class="feat-desc">Complete courses covering Islamic studies, theology, and related subjects with modern pedagogy.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">👨‍🏫</div>
+          <h3 class="feat-title">Expert Instructors</h3>
+          <p class="feat-desc">Learn from highly qualified scholars and educators with proven expertise in Islamic education.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🎯</div>
+          <h3 class="feat-title">Personalized Learning</h3>
+          <p class="feat-desc">Tailored learning paths designed to meet individual student needs and learning goals.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🌐</div>
+          <h3 class="feat-title">Global Community</h3>
+          <p class="feat-desc">Connect with students from over 15 countries and build a supportive learning network.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">📊</div>
+          <h3 class="feat-title">Progress Tracking</h3>
+          <p class="feat-desc">Detailed analytics and reports to monitor learning progress and identify improvement areas.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🏆</div>
+          <h3 class="feat-title">Certification</h3>
+          <p class="feat-desc">Earn recognized certificates upon course completion to validate your expertise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="sec testimonials-sec">
+    <div class="wrap">
+      <h2 class="hdg">What Students <em>Say</em></h2>
+
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <div class="testi-star">★★★★★</div>
+          <p class="testi-text">"AatiCademy has transformed my understanding of Islamic teachings. The instructors are knowledgeable and the curriculum is well-structured."</p>
+          <div class="testi-author">Fatima Khan</div>
+          <div class="testi-role">Student</div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-star">★★★★★</div>
+          <p class="testi-text">"The combination of Islamic education with modern teaching methods is excellent. I've learned so much in a short time."</p>
+          <div class="testi-author">Ahmed Hassan</div>
+          <div class="testi-role">Student</div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-star">★★★★★</div>
+          <p class="testi-text">"I appreciate the personalized attention and flexible learning schedule. AatiCademy truly cares about student success."</p>
+          <div class="testi-author">Zainab Ali</div>
+          <div class="testi-role">Student</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-sec">
+    <div class="wrap">
+      <h2 class="cta-h">Ready to Begin Your <em>Journey</em>?</h2>
+      <p class="cta-sub">Join thousands of students already learning at AatiCademy and transform your Islamic and academic knowledge.</p>
+      <button class="btn-gold" onclick="scrollToForm()">
+        Enroll Now <span class="arr">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="form-sec">
+    <div class="wrap">
+      <div class="form-wrap">
+        <form id="enrollForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" placeholder="+1 (555) 123-4567" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Country</label>
+            <input type="text" class="form-input" placeholder="Your country" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us about your learning goals..." required></textarea>
+          </div>
+          <button type="submit" class="form-btn">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-wrap">
+        <div>
+          <h3 class="footer-col-title">About AatiCademy</h3>
+          <p class="footer-about">
+            AatiCademy is a premier Islamic education platform dedicated to providing authentic, high-quality Islamic teachings combined with modern academic excellence.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-icon">f</a>
+            <a href="#" class="footer-social-icon">𝕏</a>
+            <a href="#" class="footer-social-icon">in</a>
+            <a href="#" class="footer-social-icon">▶</a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="footer-col-title">Courses</h3>
+          <ul class="footer-links">
+            <li><a href="#">Quranic Studies</a></li>
+            <li><a href="#">Islamic History</a></li>
+            <li><a href="#">Hadith Sciences</a></li>
+            <li><a href="#">Fiqh Studies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-col-title">Resources</h3>
+          <ul class="footer-links">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-col-title">Company</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2024 AatiCademy. All rights reserved.</div>
+        <div class="footer-links-bottom">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Your existing JavaScript code here
+    // ── THEME TOGGLE ──
+    const themeBtn = document.getElementById('themeBtn');
+    const htmlEl = document.documentElement;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+    });
+
+    // ── MOBILE MENU ──
+    const hamBtn = document.getElementById('hamBtn');
+    const mmenu = document.getElementById('mmenu');
+
+    hamBtn.addEventListener('click', () => {
+      mmenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('#mmenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mmenu.classList.remove('open');
+      });
+    });
+
+    // ── NAVBAR SCROLL EFFECT ──
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // ── CUSTOM CURSOR ──
+    const curDot = document.getElementById('cur-dot');
+    const curRing = document.getElementById('cur-ring');
+    const curTrail = document.getElementById('cur-trail');
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      curDot.style.left = mouseX + 'px';
+      curDot.style.top = mouseY + 'px';
+
+      curRing.style.left = mouseX + 'px';
+      curRing.style.top = mouseY + 'px';
+
+      curTrail.style.left = mouseX + 'px';
+      curTrail.style.top = mouseY + 'px';
+    });
+
+    // ── BUTTON HOVER EFFECTS ──
+    document.querySelectorAll('.btn-gold, .btn-wire, button').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        curDot.style.width = '20px';
+        curDot.style.height = '20px';
+        curRing.style.width = '50px';
+        curRing.style.height = '50px';
+        curRing.style.borderColor = 'rgba(201, 150, 60, 0.8)';
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        curDot.style.width = '10px';
+        curDot.style.height = '10px';
+        curRing.style.width = '38px';
+        curRing.style.height = '38px';
+        curRing.style.borderColor = 'rgba(201, 150, 60, 0.5)';
+      });
+    });
+
+    // ── SCROLL REVEAL ──
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vis');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-fade').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ── FORM HANDLING ──
+    document.getElementById('enrollForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your application! We will contact you soon.');
+      this.reset();
+    });
+
+    // ── SCROLL TO FORM ──
+    function scrollToForm() {
+      document.querySelector('.form-sec').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ── HERO CANVAS ANIMATION ──
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let particles = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(201, 150, 60, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Initialize particles
+    for (let i = 0; i < 50; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
 </body>
 
